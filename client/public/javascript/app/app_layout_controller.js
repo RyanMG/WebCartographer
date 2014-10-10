@@ -22,16 +22,6 @@ define([
     renderLayout: function renderLayout() {
       layout = new App.Views.AppLayout();
       App.layoutRegion.show(layout);
-    },
-
-    showInNavbarRegion: function showInNavbarRegion(viewName) {
-      var viewToShow = AppLayoutBabySitter.findByCustom("BabySitter:App:AppLayout:" + viewName);
-      layout.navbarRegion.show(viewToShow);
-    },
-
-    showInMainRegion: function showInMainRegion(viewName) {
-      var viewToShow = AppLayoutBabySitter.findByCustom("BabySitter:App:AppLayout:" + viewName);
-      layout.mainRegion.show(viewToShow);
     }
   });
 
@@ -39,14 +29,6 @@ define([
 
   App.complyOnce("App:LayoutController:RenderLayout", function(){
     controller.renderLayout();
-  });
-
-  App.comply("App:LayoutController:ShowInNavbarRegion", function(viewName){
-    controller.showInNavbarRegion(viewName);
-  });
-
-  App.comply("App:LayoutController:ShowInMainRegion", function(viewName){
-    controller.showInMainRegion(viewName);
   });
 
   return App.Controllers.Layout;

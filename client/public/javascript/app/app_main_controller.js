@@ -10,12 +10,6 @@ define([
 
     initialize: function initialize(){},
 
-    // showNotFound: function showNotFound(){
-    //   App.trigger("log", "App:Controller:showNotFound");
-    //   var layout = new App.Views.AppNotFoundLayout();
-    //   this.showInMain(layout);
-    // },
-
     updateRoute: function updateRoute(route) {
       App.navigate(route, {trigger:true});
     },
@@ -27,11 +21,6 @@ define([
   });
 
   var controller;
-
-  App.on("route:unknown", function(){
-    // TODO: Create a not found page
-    // controller.showNotFound();
-  });
 
   App.addInitializer(function onAppInitialize() {
     controller = new App.Controllers.Main();

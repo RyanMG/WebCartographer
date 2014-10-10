@@ -1,4 +1,4 @@
 .DS_Store
 temp/**/*
 */node_modules/*
-client/vendor/**/*
+client/public/vendor/**/*

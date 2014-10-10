@@ -9,14 +9,14 @@ require.config({
   "paths": {
     "underscore": "../vendor/underscore/underscore"
     , "backbone": "../vendor/backbone/backbone"
-    , "backbone.wreqr": "../vendor/backbone/backbone.wreqr"
-    , "backbone.radio": "../vendor/backbone/backbone.radio"
+    , "backbone.wreqr": "../vendor/backbone.wreqr/lib/backbone.wreqr"
+    , "backbone.radio": "../vendor/backbone.radio/build/backbone.radio"
     , "backbone.stickit": "../vendor/backbone/backbone.stickit"
-    , "backbone.babysitter": "../vendor/backbone/backbone.babysitter"
-    , "marionette": "../vendor/marionette/backbone.marionette"
-    , "fastclick": "../vendor/fastclick/fastclick"
+    , "backbone.babysitter": "../vendor/backbone.babysitter/lib/backbone.babysitter"
+    , "marionette": "../vendor/marionette/lib/backbone.marionette"
+    , "fastclick": "../vendor/fastclick/lib/fastclick"
     , "handlebars": "../vendor/handlebars/handlebars"
-    , "jquery": "../vendor/jquery/jquery"
+    , "jquery": "../vendor/jquery/dist/jquery"
     , "modernizr": "../vendor/modernizr/modernizr"
     , "moment": "../vendor/moment/moment"
     , "hammer": "../vendor/plugins/hammer"
@@ -42,30 +42,15 @@ require.config({
 
 require(['vendor_files'], function() {
 
-  // load our own code that's required before starting the App.
   require([
     "app"
-    // "data_layer/data_app",
-    // "babysitter/babysitter_app",
-  ], function( App ) { //, Data, Babysitter) {
+  ], function( App ) {
 
       'use strict';
 
-      $.when(
-        // Data.promise,
-        // Babysitter.promise,
-        App.promise
-      )
+      $.when(App.promise)
         .done( function() {
-
-          // Data.start();
-
-          // var fetchingAppDependencies = App.request('App:fetchDataDependencies');
-          // $.when(fetchingAppDependencies)
-          //   .done(function() {
-              App.start();
-            // });
+          App.start();
         });
-    }
-  );
+  });
 });

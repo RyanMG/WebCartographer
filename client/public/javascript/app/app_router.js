@@ -10,12 +10,6 @@ define([
 
     appRoutes: {
       '': 'dashboardRoute',
-      'expenses/:type(/:id)(/)': 'expenseSummaryRoute',
-      'expense/:type(/:id)(/)(:focus)(/)(:lineitemId)(/)': 'expenseReportRoute',
-      '*actions(/)': 'unknownRoute'
-    },
-
-    beforeRoute: function beforeRoute() {
     },
 
     onRoute: function onRoute() {
@@ -31,27 +25,16 @@ define([
     dashboardRoute: function dashboardRoute() {
     },
 
-    expenseSummaryRoute: function expenseSummaryRoute(listType, id) {
-    },
-
-    expenseReportRoute: function expenseReportRoute(type, id, focus, lineitemId) {
-    },
-
-    unknownRoute: function unknownRoute() {
-    }
   });
 
-  // have router initialize itself in scope variable.
   var router;
 
   App.comply('App:Router:Instantiate', function instantiateAppRouter() {
     // store router instance in scope variable.
-    router = new Router(
-      {
-        // required parameter
-        controller: new RouterController()
-      }
-    );
+    router = new Router({
+      // required parameter
+      controller: new RouterController()
+    });
   });
 
   return Router;
