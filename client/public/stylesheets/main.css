@@ -1,0 +1,51 @@
+body {
+  height: 100%;
+  width: 100%;
+  background: #fff;
+}
+#navbar-layout-view header {
+  width: 100%;
+  height: 52px;
+  background: #ccc;
+  border-bottom: 1px solid #999;
+}
+#navbar-layout-view header button.nav-button {
+  height: 30px;
+  width: 100px;
+  border-radius: 6px 6px 6px 6px;
+}
+.hidden {
+  display: none;
+  visibility: invisible;
+}
+#picture-taker {
+  margin-top: 40px;
+}
+#picture-taker video {
+  border: 1px solid #999;
+  display: block;
+  margin: 0 auto;
+}
+#picture-taker canvas#image-preview {
+  height: 400px;
+  width: 400px;
+  border: 1px solid #999;
+  margin: 0 auto;
+}
+#picture-taker button {
+  display: block;
+  height: 40px;
+  width: 130px;
+  margin: 10px auto;
+}
+#picture-taker label.form-label {
+  display: block;
+  font-size: 1em;
+  text-align: center;
+}
+#picture-taker input {
+  display: block;
+  height: 20px;
+  width: 230px;
+  margin: 10px auto;
+}

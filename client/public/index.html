@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <title>JetSki</title>
+    <link rel="stylesheet" href="./vendor/normalize-css/normalize.css">
+    <link rel="stylesheet" href="./stylesheets/main.css">
+  </head>
+  <body>
+    <div id="app-layout-region"></div>
+    <script id="app_layout" type="text/x-handlebars-template">
+      <div id="app-navbar-region"></div>
+      <div id="app-main-region"></div>
+    </script>
+    <script id="navbar_layout" type="text/x-handlebars-template">
+      <header>
+        <div class="content"></div>
+      </header>
+    </script>
+    <script id="picture_taker_layout" type="text/x-handlebars-template">
+      <div id="picture-taker">
+        <video id="video-preview" height="400" width="400" autoplay></video>
+        <canvas id="image-preview" height="400" width="400" class="hidden"></canvas>
+        <button id="image-taker">Take picture</button>
+        <label for="image-text" class="form-label">Image Caption</label>
+        <input id="image-text" name="image-text">
+      </div>
+    </script>
+    <script data-main="./javascript/main.js" src="./vendor/requirejs/require.js"></script>
+  </body>
+</html>

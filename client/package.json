@@ -1,0 +1,16 @@
+{
+  "name": "map-maker",
+  "version": "0.0.1",
+  "author": "David R Hall",
+  "description": "Pen and paper RPG map maker",
+  "private": true,
+  "dependencies": {
+    "bower": "1.2.7"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-stylus": "~0.18.0",
+    "grunt-contrib-jade": "~0.12.0"
+  }
+}
