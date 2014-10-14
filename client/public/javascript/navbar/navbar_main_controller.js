@@ -17,7 +17,9 @@ define([
   // Listeners
   // ======================
 
-  controller = new App.Navbar.Controllers.Main();
+  App.addInitializer(function() {
+    controller = new App.Navbar.Controllers.Main();
+  });
 
   App.comply("Navbar:MainController: <command> ", function() {
     // Do thing...

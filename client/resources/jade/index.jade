@@ -15,5 +15,9 @@ html(lang="en-US")
 
     script#app_layout(type="text/x-handlebars-template")
       include templates/app_layout
+    script#navbar_layout(type="text/x-handlebars-template")
+      include templates/navbar_layout
+    script#map_layout(type="text/x-handlebars-template")
+      include templates/map_layout
 
     script(data-main="./javascript/main.js", src="./vendor/requirejs/require.js")

@@ -12,9 +12,9 @@ define([
   var $navbarComponentsDeferred = new $.Deferred();
 
   require([
-    "navbar/navbar_main_controller"
+    "navbar/navbar_layout_view"
     ,"navbar/navbar_layout_controller"
-    ,"navbar/navbar_layout_view"
+    ,"navbar/navbar_main_controller"
   ], function() {
 
     $navbarComponentsDeferred.resolve();

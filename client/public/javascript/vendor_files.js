@@ -1,9 +1,11 @@
 define([
+  "jquery-hammerjs",
+  "backbone.hammer",
   "marionette", // loads Backbone and jQuery
   "backbone.radio",
   "fastclick",
   "modernizr"
-], function(Marionette, Radio, FastClick, Modernizr) {
+], function(jQh, BBH, Marionette, Radio, FastClick, Modernizr) {
 
     'use strict';
 

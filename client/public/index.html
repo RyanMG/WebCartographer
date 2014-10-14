@@ -12,9 +12,26 @@
   <body>
     <div id="app-layout-region"></div>
     <script id="app_layout" type="text/x-handlebars-template">
-      <div id="app-navbar-region"></div>
-      <div id="app-main-region"></div>
+      <div id="app-actionbar-region"></div>
+      <div id="app-map-region"></div>
     </script>
+    <script id="navbar_layout" type="text/x-handlebars-template">
+      <div id="toolbar">
+        <button id="rotate-clockwise">Rotate Clockwise</button>
+        <button id="rotate-counter-clockwise">Rotate Counter-Clockwise</button>
+        <select id="tileTypePicker">
+          <option>stone_tiles_2x2_01</option>
+          <option>stone_tiles_4x4_01</option>
+          <option>stone_altar_4x4_01</option>
+          <option>stone_pit_2x4_01</option>
+          <option>stone_stairs_2x2_01</option>
+          <option>stone_stairs_2x2_02</option>
+          <option>black_pit_2x4_01</option>
+        </select>
+        <button id="new-tile">New Tile</button>
+      </div>
+    </script>
+    <script id="map_layout" type="text/x-handlebars-template"><img id="mover" src="./img/stone_altar_4x4_01.jpg" class="tile"></script>
     <script data-main="./javascript/main.js" src="./vendor/requirejs/require.js"></script>
   </body>
 </html>

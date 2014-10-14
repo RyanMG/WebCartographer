@@ -1,8 +1,6 @@
 define([
   "app"
-  // ,"helpers/helper_app"
-  // ,"data_layer/data_app"
-], function(App) { //, Helper, Data) {
+], function(App) {
 
   "use strict";
 
