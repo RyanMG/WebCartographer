@@ -1,19 +1,19 @@
 define([
-  "jquery-hammerjs",
-  "backbone.hammer",
   "marionette", // loads Backbone and jQuery
   "backbone.radio",
-  "fastclick",
-  "modernizr"
-], function(jQh, BBH, Marionette, Radio, FastClick, Modernizr) {
+  "modernizr",
+  "handlebars",
+  "jstorage",
+  "moment",
+  "bacon",
+  "bacon.model",
+  "bacon.jquery"
+], function( Marionette, Radio, Modernizr, Handlebars, jstorage, Moment, Bacon ) {
 
     'use strict';
 
-    FastClick.attach(document.body);
-
     _.extend( Marionette.Application.prototype,
-        Radio.Requests
-      , Radio.Commands
+      Radio.Requests
+      ,Radio.Commands
     );
-  }
-);
+});

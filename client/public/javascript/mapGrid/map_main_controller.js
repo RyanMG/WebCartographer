@@ -19,6 +19,23 @@ define([
     rotateSelectedTileCounterClockwise: function rotateSelectedTileCounterClockwise() {
       var view = AppLayoutBabySitter.findByCustom("BabySitter:App:AppLayout:MapLayout");
       view.triggerMethod('rotateCounterClockwise');
+    },
+
+    addNewTile: function addNewTile(type) {
+      var view = AppLayoutBabySitter.findByCustom("BabySitter:App:AppLayout:MapLayout");
+      var size = type.split('_')[2].split('x');
+      var $img = $('<img>').addClass('tile').attr('src', './img/' + type + '.jpg');
+      $img.css({
+        'height' : size[0] * 64,
+        'width' : size[1] * 64
+      });
+      view.$el.append($img);
+      view.triggerMethod('initializeTile', $img);
+    },
+
+    clearMap: function clearMap() {
+      var view = AppLayoutBabySitter.findByCustom("BabySitter:App:AppLayout:MapLayout");
+      view.$el.empty();
     }
 
   });
@@ -35,9 +52,17 @@ define([
     controller.rotateSelectedTileClockwise();
   });
 
-  App.command("Map:MainController:rotateSelectedTileCounterClockwise", function() {
+  App.comply("Map:MainController:rotateSelectedTileCounterClockwise", function() {
     controller.rotateSelectedTileCounterClockwise();
   });
+
+  App.comply("Map:MainController:addNewTile", function(tileType) {
+    controller.addNewTile(tileType);
+  });
+
+  App.comply("Map:MainController:clearMap", function() {
+    controller.clearMap();
+  }); 
 
   return App.Map.Controllers.Main;
 });

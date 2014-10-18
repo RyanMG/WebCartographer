@@ -1,4 +1,3 @@
-
 .hidden
   display none
   visibility invisible
@@ -24,10 +23,16 @@ body
 
   button, select
     height: 40px
-    width: 170px
+    width: 141px
+    font-size: 10px
     text-align: center
-    float: left;
-    margin-right: 10px;
+    float: left
+    margin-right: 15px
+    &:last-child
+      margin-right: 0px
+
+  select
+    margin-top: 11px
 
 .mapGrid
   border: 2px solid #111
@@ -44,11 +49,10 @@ body
   background-position: -16px -16px
   overflow:hidden
 
-.tile
-  background: #fff
-  width: 128px
-  height: 128px
-  cursor: pointer
+  .tile
+    background: #fff
+    position: absolute
+    cursor: pointer
+    &.animate
+      transition(all .3s)
 
-#mover.animate
-  transition(all .3s)

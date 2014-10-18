@@ -15,13 +15,20 @@ define([
       rotateClockwiseBtn: '#rotate-clockwise',
       rotateCounterBtn: '#rotate-counter-clockwise',
       newTileBtn: '#new-tile',
-      tilePicker: '#tileTypePicker'
+      tilePicker: '#tileTypePicker',
+      clearMapBtn: '#clear-tiles'
     },
 
-    events: {
-      "tap @ui.rotateClockwiseBtn": "onRotateClockwiseTap",
-      "tap @ui.rotateCounterBtn": "onRotateCounterBtnTap",
-      "tap @ui.newTileBtn": "onNewTileBtnTap",
+    hammerEvents: {
+      "tap #rotate-clockwise": "onRotateClockwiseTap",
+      "tap #rotate-counter-clockwise": "onRotateCounterBtnTap",
+      "tap #new-tile": "onNewTileBtnTap",
+      "tap #clear-tiles": "onClearTilesBtnTap"
+    },
+
+    hammerOptions: {
+      tap: true,
+      domEvents: true
     },
 
     onRotateClockwiseTap: function onRotateClockwiseTap() {
@@ -33,7 +40,12 @@ define([
     },
 
     onNewTileBtnTap: function onNewTileBtnTap() {
-      App.command("Map:MainController:rotateSelectedTileClockwise");
+      var tileType = this.ui.tilePicker.val();
+      App.command("Map:MainController:addNewTile", tileType);
+    },
+
+    onClearTilesBtnTap: function onClearTilesBtnTap() {
+      App.command("Map:MainController:clearMap");      
     },
 
     addToBabySitter: function addToBabySitter() {

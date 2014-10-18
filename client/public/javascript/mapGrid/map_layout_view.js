@@ -19,14 +19,18 @@ define([
 
     ui: {},
 
-    events: {},
+    hammerEvents: {
+      "press": "onMapGripTap"
+    },
+
+    onMapGripTap: function onMapGripTap(evt) {
+      var clicked = $(evt.gesture.target).closest('.tile');
+      if (clicked.length === 0) return;
+      this.triggerMethod('initializeTile', clicked);
+    },
 
     initialize: function initialize() {
       this.addToBabySitter();
-    },
-
-    onShow: function onShow() {
-      this.triggerMethod('initializeTile', this.$el.find('.tile'));
     },
 
     addToBabySitter: function addToBabySitter() {

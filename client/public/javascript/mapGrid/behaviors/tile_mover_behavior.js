@@ -81,10 +81,12 @@ define([
         x: this.START_X + ev.deltaX,
         y: this.START_Y + ev.deltaY
       };
+      var offsetX = this.ui.tile.height();
+      var offsetY = this.ui.tile.width();
       if (this.transform.translate.x < 0) this.transform.translate.x = 0;
       if (this.transform.translate.y < 0) this.transform.translate.y = 0;
-      if (this.transform.translate.x > this.view.$el.width() - 128) this.transform.translate.x = this.view.$el.width() - 128;
-      if (this.transform.translate.y > this.view.$el.height() - 128) this.transform.translate.y = this.view.$el.height()- 128;
+      if (this.transform.translate.x > this.view.$el.width() - offsetY) this.transform.translate.x = this.view.$el.width() - offsetY;
+      if (this.transform.translate.y > this.view.$el.height() - offsetX) this.transform.translate.y = this.view.$el.height()- offsetX;
       this.requestElementUpdate();
     },
 
@@ -95,13 +97,13 @@ define([
     },
 
     onRotateClockwise: function onRotateClockwise() {
-      this.ui.tile.removeClass('animate');
+      this.ui.tile.addClass('animate');
       this.transform.angle += 90;
       this.requestElementUpdate();
     },
 
     onRotateCounterClockwise: function onRotateCounterClockwise() {
-      this.ui.tile.removeClass('animate');
+      this.ui.tile.addClass('animate');
       this.transform.angle -= 90;
       this.requestElementUpdate();
     }
