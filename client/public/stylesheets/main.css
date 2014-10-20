@@ -57,8 +57,13 @@ body {
 }
 .mapGrid .tile {
   background: #fff;
+  opacity: 0.9;
   position: absolute;
   cursor: pointer;
+}
+.mapGrid .tile.selected {
+  opacity: 1;
+  border: 1px solid #fff;
 }
 .mapGrid .tile.animate {
   -webkit-transition: all 0.3s;

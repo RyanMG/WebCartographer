@@ -51,8 +51,12 @@ body
 
   .tile
     background: #fff
+    opacity: 0.9
     position: absolute
     cursor: pointer
+    &.selected
+      opacity: 1.0
+      border: 1px solid #fff
     &.animate
       transition(all .3s)
 

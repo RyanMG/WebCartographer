@@ -20,8 +20,9 @@ define([
     },
 
     onInitializeTile: function initializeTile($element, isVisible) {
+      this.view.$el.find('.selected').removeClass('selected');
       this.ui.tile = $element;
-      this.ui.tile.addClass('animate');
+      this.ui.tile.addClass('animate').addClass('selected');
       if (!isVisible) {
         this.setProperties();
       } else {
