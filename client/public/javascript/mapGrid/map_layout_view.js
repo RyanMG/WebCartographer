@@ -20,13 +20,13 @@ define([
     ui: {},
 
     hammerEvents: {
-      "press": "onMapGripTap"
+      "tap": "onMapGripTap"
     },
 
     onMapGripTap: function onMapGripTap(evt) {
       var clicked = $(evt.gesture.target).closest('.tile');
       if (clicked.length === 0) return;
-      this.triggerMethod('initializeTile', clicked);
+      this.triggerMethod('initializeTile', clicked, true);
     },
 
     initialize: function initialize() {

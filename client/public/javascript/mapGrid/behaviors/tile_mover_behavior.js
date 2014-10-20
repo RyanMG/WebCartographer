@@ -19,10 +19,14 @@ define([
 
     },
 
-    onInitializeTile: function initializeTile($element) {
+    onInitializeTile: function initializeTile($element, isVisible) {
       this.ui.tile = $element;
       this.ui.tile.addClass('animate');
-      this.setProperties();
+      if (!isVisible) {
+        this.setProperties();
+      } else {
+        this.setPropertiesFromExisting();
+      }
 
       var hammer = new Hammer.Manager(this.ui.tile[0]);
 
@@ -48,11 +52,26 @@ define([
       };
     },
 
+    setPropertiesFromExisting: function setPropertiesFromExisting(){
+      this.START_X = this.ui.tile.data('x');
+      this.START_Y = this.ui.tile.data('y');
+      var rot = this.ui.tile.data('r');
+      this.ticking = false;
+      this.transform = {
+        translate: { x: this.START_X, y: this.START_Y },
+        angle: rot
+      };
+    },
+
     updateElementTransform: function updateElementTransform() {
       var value = [
         'translate(' + this.transform.translate.x + 'px, ' + this.transform.translate.y + 'px)',
         'rotate(' + this.transform.angle + 'deg)'
       ].join(" ");
+
+      this.ui.tile.data('x', this.transform.translate.x);
+      this.ui.tile.data('y', this.transform.translate.y);
+      this.ui.tile.data('r', this.transform.angle);
 
       this.ui.tile[0].style.webkitTransform = value;
       this.ui.tile[0].style.mozTransform = value;
