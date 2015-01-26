@@ -1,7 +1,5 @@
 define([], function(){
 
-  "use strict";
-
   var App = new Backbone.Marionette.Application()
    , $appDeferred = new $.Deferred();
 
@@ -11,29 +9,26 @@ define([], function(){
   
   require([
      "app/app_all_components"
-     ,"navbar/navbar_all_components"
+     ,"toolbar/toolbar_all_components"
      ,"mapGrid/map_all_components"
+     ,"dialog/dialog_all_components"
      , "app/app_router"
-  ], function( appComponentsPromise, navbarComponentsPromise, mapComponentsPromise ) {
-    $.when( appComponentsPromise, navbarComponentsPromise, mapComponentsPromise ).done(function() {
-      // all necessary module definitions have loaded.
+  ], function( appComponentsPromise, toolbarComponentsPromise, mapComponentsPromise, dialogComponentsPromise ) {
+    $.when( appComponentsPromise, toolbarComponentsPromise, mapComponentsPromise, dialogComponentsPromise ).done(function() {
       $appDeferred.resolve();
     });
   });
-
-  // Listeners
-  // =================
 
   App.on("start", function App_start(){
 
     // Render master Layout for entire application.
     App.command("App:LayoutController:RenderLayout");
-    App.command("Navbar:LayoutController:RenderLayout");
-    App.command("Map:LayoutController:RenderLayout");
 
     /*** START ROUTER ***/
     App.command('App:Router:Instantiate');
     Backbone.history.start();
+
+    App.command("Navbar:DialogController:showNewMapDialog");
   });
 
   return App;

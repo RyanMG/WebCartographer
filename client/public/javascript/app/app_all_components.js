@@ -2,8 +2,6 @@ define([
   "app"
 ], function( App ) {
 
-  "use strict";
-
   App.Controllers = {};
   App.Views = {};
 

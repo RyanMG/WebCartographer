@@ -10,8 +10,6 @@ define([
   "bacon.jquery"
 ], function( Marionette, Radio, Modernizr, Handlebars, jstorage, Moment, Bacon ) {
 
-    'use strict';
-
     _.extend( Marionette.Application.prototype,
       Radio.Requests
       ,Radio.Commands

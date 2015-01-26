@@ -3,8 +3,6 @@ define([
   ,"babysitter/app_layout_babysitter"
 ], function( App, AppLayoutBabySitter) {
 
-  "use strict";
-
   var controller;
   var layout;
 
@@ -13,7 +11,8 @@ define([
     initialize: function initialize(){
 
       App.addRegions({
-        layoutRegion: "#app-layout-region" 
+        layoutRegion: "#app-layout-region",
+        dialogRegion: "#app-dialog-region"
       });
     },
 
@@ -22,9 +21,9 @@ define([
       App.layoutRegion.show(layout);
     },
 
-    showInActionbarRegion: function showInActionbarRegion() {
-      var view = AppLayoutBabySitter.findByCustom("BabySitter:App:AppLayout:NavbarLayout");
-      layout.actionbarRegion.show(view);
+    showInToolbarRegion: function showInToolbarRegion() {
+      var view = AppLayoutBabySitter.findByCustom("BabySitter:App:AppLayout:ToolbarLayout");
+      layout.toolbarRegion.show(view);
     },
 
     showInMapRegion: function showInMapRegion() {
@@ -41,8 +40,8 @@ define([
     controller.renderLayout();
   });
 
-  App.comply("App:LayoutController:ShowInActionbarRegion", function() {
-    controller.showInActionbarRegion();
+  App.comply("App:LayoutController:ShowInToolbarRegion", function() {
+    controller.showInToolbarRegion();
   });
 
   App.comply("App:LayoutController:ShowInMapRegion", function() {

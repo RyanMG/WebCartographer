@@ -7,9 +7,10 @@ define([
     template: "#app_layout",
 
     regions: {
-      actionbarRegion: "#app-actionbar-region",
+      toolbarRegion: "#app-toolbar-region",
       mapRegion: "#app-map-region"
     }
+
   });
 
   return App.Views.AppLayout;

@@ -14,23 +14,29 @@ define([
     template: "#map_layout",
 
     behaviors: {
-      'TileMover': {}
+      'TileMover': {},
+      'MapBuilder': {}
     },
 
     ui: {},
 
-    hammerEvents: {
-      "tap": "onMapGripTap"
+    events: {
+      "click": "onMapGridClick"
     },
 
-    onMapGripTap: function onMapGripTap(evt) {
-      var clicked = $(evt.gesture.target).closest('.tile');
+    onMapGridClick: function onMapGridClick(evt) {
+      var clicked = $(evt.originalEvent.target).closest('.tile');
       if (clicked.length === 0) return;
       this.triggerMethod('initializeTile', clicked, true);
     },
 
-    initialize: function initialize() {
+    initialize: function initialize(options) {
+      this.options = _.extend({}, options);
       this.addToBabySitter();
+    },
+
+    onRender: function onRender() {
+      this.triggerMethod('buildMap');
     },
 
     addToBabySitter: function addToBabySitter() {

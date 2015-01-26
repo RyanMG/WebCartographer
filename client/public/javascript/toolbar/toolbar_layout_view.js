@@ -3,9 +3,9 @@ define([
   , "babysitter/app_layout_babysitter"
 ],function(App, AppLayoutBabySitter){
 
-  App.Navbar.Views.NavbarLayout = Backbone.Marionette.ItemView.extend({
+  App.Toolbar.Views.ToolbarLayout = Backbone.Marionette.ItemView.extend({
 
-    template: "#navbar_layout",
+    template: "#toolbar_layout",
 
     initialize: function initialize() {
       this.addToBabySitter();
@@ -19,40 +19,35 @@ define([
       clearMapBtn: '#clear-tiles'
     },
 
-    hammerEvents: {
-      "tap #rotate-clockwise": "onRotateClockwiseTap",
-      "tap #rotate-counter-clockwise": "onRotateCounterBtnTap",
-      "tap #new-tile": "onNewTileBtnTap",
-      "tap #clear-tiles": "onClearTilesBtnTap"
+    events: {
+      "click @ui.rotateClockwiseBtn": "onRotateClockwiseClick",
+      "click @ui.rotateCounterBtn": "onRotateCounterBtnClick",
+      "click @ui.newTileBtn": "onNewTileBtnClick",
+      "click @ui.clearMapBtn": "onClearTilesBtnClick"
     },
 
-    hammerOptions: {
-      tap: true,
-      domEvents: true
-    },
-
-    onRotateClockwiseTap: function onRotateClockwiseTap() {
+    onRotateClockwiseClick: function onRotateClockwiseClick() {
       App.command("Map:MainController:rotateSelectedTileClockwise");
     },
 
-    onRotateCounterBtnTap: function onRotateCounterBtnTap() {
+    onRotateCounterBtnClick: function onRotateCounterBtnClick() {
       App.command("Map:MainController:rotateSelectedTileCounterClockwise");
     },
 
-    onNewTileBtnTap: function onNewTileBtnTap() {
+    onNewTileBtnClick: function onNewTileBtnClick() {
       var tileType = this.ui.tilePicker.val();
       App.command("Map:MainController:addNewTile", tileType);
     },
 
-    onClearTilesBtnTap: function onClearTilesBtnTap() {
+    onClearTilesBtnClick: function onClearTilesBtnClick() {
       App.command("Map:MainController:clearMap");      
     },
 
     addToBabySitter: function addToBabySitter() {
-      AppLayoutBabySitter.add(this, "BabySitter:App:AppLayout:NavbarLayout");
+      AppLayoutBabySitter.add(this, "BabySitter:App:AppLayout:ToolbarLayout");
     }
 
   });
 
-  return App.Navbar.Views.NavbarLayout;
+  return App.Toolbar.Views.ToolbarLayout;
 });

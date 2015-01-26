@@ -2,8 +2,6 @@ define([
   "app"
 ], function(App) {
 
-  "use strict";
-
   App.Map = {
     Controllers: {},
     Views: {}
@@ -16,6 +14,7 @@ define([
     ,"mapGrid/map_layout_view"
     ,"mapGrid/map_layout_controller"
     ,"mapGrid/behaviors/tile_mover_behavior"
+    ,"mapGrid/behaviors/build_map_behavior"
   ], function() {
 
     $mapComponentsDeferred.resolve();

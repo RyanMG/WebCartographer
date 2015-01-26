@@ -3,8 +3,6 @@ define([
   ,"babysitter/app_layout_babysitter"
 ], function(App, AppLayoutBabySitter) {
 
-  "use strict";
-
   var controller;
 
   App.Map.Controllers.Main = Backbone.Marionette.Controller.extend({

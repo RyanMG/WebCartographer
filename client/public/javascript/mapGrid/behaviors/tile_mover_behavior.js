@@ -3,15 +3,13 @@ define([
   ,"hammerjs"
 ], function(App, Hammer) {
 
-  "use strict";
-
   var reqAnimationFrame = (function () {
     return window[Hammer.prefixed(window, 'requestAnimationFrame')] || function (callback) {
       window.setTimeout(callback, 1000 / 60);
     };
   })();
 
-  App.Behaviors['TileMover'] = Backbone.Marionette.Behavior.extend({
+  App.Behaviors.TileMover = Backbone.Marionette.Behavior.extend({
 
     ui: {},
 
@@ -44,6 +42,7 @@ define([
     },
 
     setProperties: function setProperties() {
+      debugger;
       this.START_X = Math.round((this.view.$el.width() - this.ui.tile.width()) / 2);
       this.START_Y = Math.round((this.view.$el.height() - this.ui.tile.height()) / 2);
       this.ticking = false;

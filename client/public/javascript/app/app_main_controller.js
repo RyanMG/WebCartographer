@@ -2,8 +2,6 @@ define([
   "app"
 ], function(App) {
 
-  "use strict";
-
   App.Controllers.Main = Backbone.Marionette.Controller.extend({
 
     initialize: function initialize(){},
@@ -14,6 +12,11 @@ define([
 
     updateRouteSilent: function updateRouteSilent(route) {
       App.navigate(route, {trigger:false});
+    },
+
+    buildNewMap: function buildNewMap(newMapOptions) {
+      App.command("Toolbar:LayoutController:RenderLayout");
+      App.command("Map:LayoutController:RenderLayout", newMapOptions);
     }
 
   });
@@ -30,6 +33,10 @@ define([
 
   App.comply('App:MainController:updateRouteSilent', function(route) {
     controller.updateRouteSilent(route);
+  });
+
+  App.comply('App:MainController:buildNewMap', function(newMapOptions) {
+    controller.buildNewMap(newMapOptions);
   });
 
   return App.Controllers.Main;

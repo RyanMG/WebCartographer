@@ -11,11 +11,12 @@
   </head>
   <body>
     <div id="app-layout-region"></div>
+    <div id="app-dialog-region"></div>
     <script id="app_layout" type="text/x-handlebars-template">
-      <div id="app-actionbar-region"></div>
+      <div id="app-toolbar-region"></div>
       <div id="app-map-region"></div>
     </script>
-    <script id="navbar_layout" type="text/x-handlebars-template">
+    <script id="toolbar_layout" type="text/x-handlebars-template">
       <div id="toolbar">
         <button id="rotate-counter-clockwise">Rotate Counter-Clockwise</button>
         <button id="rotate-clockwise">Rotate Clockwise</button>
@@ -33,6 +34,24 @@
       </div>
     </script>
     <script id="map_layout" type="text/x-handlebars-template">
+      <div id="grid"></div>
+    </script>
+    <script id="dialog_template" type="text/x-handlebars-template">
+      <form id="newMapForm">
+        <label for="size">Enter a map size:</label>
+        <input name="sizeWidth" type="text">
+        <p>x</p>
+        <input name="sizeHeight" type="text">
+        <label for="background">Select a background pattern:</label>
+        <select name="background">
+          <option>Grass</option>
+          <option>Stone</option>
+          <option>Wood</option>
+          <option>Dirt</option>
+          <option>Slate</option>
+        </select>
+        <button id="submitDialog">Make New Map</button>
+      </form>
     </script>
     <script data-main="./javascript/main.js" src="./vendor/requirejs/require.js"></script>
   </body>

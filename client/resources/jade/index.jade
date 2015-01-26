@@ -12,12 +12,15 @@ html(lang="en-US")
   body
 
     div#app-layout-region
+    div#app-dialog-region
 
     script#app_layout(type="text/x-handlebars-template")
       include templates/app_layout
-    script#navbar_layout(type="text/x-handlebars-template")
-      include templates/navbar_layout
+    script#toolbar_layout(type="text/x-handlebars-template")
+      include templates/toolbar_layout
     script#map_layout(type="text/x-handlebars-template")
       include templates/map_layout
+    script#dialog_template(type="text/x-handlebars-template")
+      include templates/dialog_template
 
     script(data-main="./javascript/main.js", src="./vendor/requirejs/require.js")
