@@ -25,9 +25,6 @@ define([
     },
 
     onMapGridClick: function onMapGridClick(evt) {
-      var clicked = $(evt.originalEvent.target).closest('.tile');
-      if (clicked.length === 0) return;
-      this.triggerMethod('initializeTile', clicked, true);
     },
 
     initialize: function initialize(options) {

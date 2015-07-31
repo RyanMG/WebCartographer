@@ -4,11 +4,8 @@ define([
   "modernizr",
   "handlebars",
   "jstorage",
-  "moment",
-  "bacon",
-  "bacon.model",
-  "bacon.jquery"
-], function( Marionette, Radio, Modernizr, Handlebars, jstorage, Moment, Bacon ) {
+  "moment"
+], function( Marionette, Radio, Modernizr, Handlebars, jstorage, Moment ) {
 
     _.extend( Marionette.Application.prototype,
       Radio.Requests

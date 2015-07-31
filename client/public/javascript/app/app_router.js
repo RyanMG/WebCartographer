@@ -1,41 +1,27 @@
-define([
-  "app"
-], function( App ) {
+define(function(require) {
 
-  // Create main Router
-  var Router = Backbone.Marionette.AppRouter.extend({
+  var Marionette    = require('marionette')
+    , globalChannel = Backbone.Radio.channel('globalChannel')
+    , Router
+    , RouterController;
 
-    initialize: function initialize() {
-    },
+  Router = Marionette.AppRouter.extend({
 
     appRoutes: {
       '': 'dashboardRoute',
     },
 
-    onRoute: function onRoute() {
-    }
+    onRoute: function() {}
 
   });
 
   // create controller to store router methods.
-  var RouterController = Backbone.Marionette.Controller.extend({
+  RouterController = Backbone.Marionette.Controller.extend({
 
-    initialize: function initialize(options){},
-
-    dashboardRoute: function dashboardRoute() {
-    },
+    dashboardRoute: function() {},
 
   });
 
-  var router;
+  return new Router({ controller: new RouterController() });
 
-  App.comply('App:Router:Instantiate', function instantiateAppRouter() {
-    // store router instance in scope variable.
-    router = new Router({
-      // required parameter
-      controller: new RouterController()
-    });
-  });
-
-  return Router;
 });

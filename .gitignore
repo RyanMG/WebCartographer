@@ -2,3 +2,5 @@
 temp/**/*
 */node_modules/*
 client/public/vendor/**/*
+temp/**/*
+client/images/**/*

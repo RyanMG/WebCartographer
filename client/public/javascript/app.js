@@ -1,35 +1,17 @@
-define([], function(){
+define(function(require) {
 
-  var App = new Backbone.Marionette.Application()
-   , $appDeferred = new $.Deferred();
+  var Backbone      = require('backbone')
+    , Marionette    = require('marionette')
+    , AppRouter     = require('app/app_router')
+    , globalChannel = Backbone.Radio.channel('global')
+    , App           = new Backbone.Marionette.Application();
 
-  App.promise = $appDeferred.promise();
+  App.start();
+  // Render master Layout for entire application.
+  globalChannel.request("App:LayoutController:RenderLayout");
 
-  Backbone.Marionette.Behaviors.behaviorsLookup = App.Behaviors = {};
-  
-  require([
-     "app/app_all_components"
-     ,"toolbar/toolbar_all_components"
-     ,"mapGrid/map_all_components"
-     ,"dialog/dialog_all_components"
-     , "app/app_router"
-  ], function( appComponentsPromise, toolbarComponentsPromise, mapComponentsPromise, dialogComponentsPromise ) {
-    $.when( appComponentsPromise, toolbarComponentsPromise, mapComponentsPromise, dialogComponentsPromise ).done(function() {
-      $appDeferred.resolve();
-    });
-  });
+  Backbone.history.start();
 
-  App.on("start", function App_start(){
+  globalChannel.request("Navbar:DialogController:showNewMapDialog");
 
-    // Render master Layout for entire application.
-    App.command("App:LayoutController:RenderLayout");
-
-    /*** START ROUTER ***/
-    App.command('App:Router:Instantiate');
-    Backbone.history.start();
-
-    App.command("Navbar:DialogController:showNewMapDialog");
-  });
-
-  return App;
 });

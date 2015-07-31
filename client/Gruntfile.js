@@ -3,19 +3,6 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    stylus: {
-      compile: {
-        expand: true,
-        cwd: 'resources/stylus',
-        src:['main.styl'],
-        dest: 'public/stylesheets',
-        ext: '.css',
-        options: {
-          pretty: true,
-          compress:false
-        }
-      }
-    },
     jade: {
       compile: {
         expand: true,
@@ -28,10 +15,20 @@ module.exports = function(grunt) {
         }
       }
     },
+    sass: {
+      options: {
+        sourceMap: true
+      },
+      dist: {
+        files: {
+          'public/stylesheets/main.css': 'resources/sass/main.scss'
+        }
+      }
+    },
     watch: {
       compileStylus: {
-        files: [ 'resources/stylus/**/*.styl' ],
-        tasks: [ 'compileStylus' ],
+        files: [ 'resources/sass/**/*.scss' ],
+        tasks: [ 'compileSass' ],
         options: {
           livereload: true
         }
@@ -47,14 +44,12 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-jade');
-  grunt.loadNpmTasks('grunt-contrib-stylus');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('compileJade', ['jade']);
-  grunt.registerTask('compileStylus', ['stylus']);
+  grunt.registerTask('compileSass', ['sass:dist']);
 
   grunt.registerTask('default', ['watch']);
-
-  grunt.registerTask('test', []);
 
 };
