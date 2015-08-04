@@ -1,8 +1,6 @@
-define([
-  "app"
-], function(App) {
+define(function(require) {
 
-  App.Controllers.Main = Backbone.Marionette.Controller.extend({
+ return Backbone.Marionette.Controller.extend({
 
     initialize: function initialize(){},
 
@@ -23,9 +21,7 @@ define([
 
   var controller;
 
-  App.addInitializer(function onAppInitialize() {
-    controller = new App.Controllers.Main();
-  });
+  controller = new App.Controllers.Main();
 
   App.comply('App:MainController:updateRoute', function(route) {
     controller.updateRoute(route);
@@ -39,5 +35,4 @@ define([
     controller.buildNewMap(newMapOptions);
   });
 
-  return App.Controllers.Main;
 });

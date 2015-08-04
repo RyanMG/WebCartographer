@@ -16,7 +16,7 @@ define(function(require) {
   });
 
   // create controller to store router methods.
-  RouterController = Backbone.Marionette.Controller.extend({
+  RouterController = Marionette.Controller.extend({
 
     dashboardRoute: function() {},
 
