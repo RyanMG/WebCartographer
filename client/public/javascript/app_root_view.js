@@ -24,7 +24,11 @@ define(function(require) {
         , MapView     = require('modules/mapGrid/map_layout_view');
 
       this.getRegion('toolbar').show( new ToolbarView() );
-      this.getRegion('map').show( new MapView() );
+      this.getRegion('map').show( new MapView({
+        height: 10,
+        width: 10,
+        bg_texture: 'wood'
+      }) );
     }
   });
 

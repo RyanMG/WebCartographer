@@ -11,9 +11,9 @@ define(function(require) {
     events: {},
 
     onBuildMap: function onBuildMap() {
-      var height = this.view.options.height * 64
-        , width = this.view.options.width * 64
-        , texture = 'url(img/' + this.view.options.texture + '_floor_bg.jpg)'
+      var height = this.view.height * 64
+        , width = this.view.width * 64
+        , texture = 'url(img/' + this.view.bg_texture + '_floor_bg.jpg)'
         , top = 0 - (height / 2) + 50
         , left = 0 - (width / 2);
 
@@ -30,7 +30,7 @@ define(function(require) {
         'margin-top': top - 2,
         'margin-left': left - 2
       });
-      for (var i = 1; i < this.view.options.height; i++) {
+      for (var i = 1; i < this.view.height; i++) {
         $('<div class="grid-line grid-line-v">').css({ left: i * 64 }).appendTo(this.ui.grid);
         $('<div class="grid-line grid-line-h">').css({ top: i * 64 }).appendTo(this.ui.grid);
       }

@@ -13,7 +13,7 @@ require([
 
     app.start();
 
-    Backbone.history.start({pushState: true});
+    Backbone.history.start();
 
   });
 
