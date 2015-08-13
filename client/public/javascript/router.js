@@ -1,11 +1,11 @@
 define(function(require) {
 
-  var Marionette    = require('marionette')
-    , Radio         = require('backbone.radio')
+  var Mn    = require('marionette')
+    , Radio = require('backbone.radio')
     , Router
-    , RouterController;
+    , RouterObject;
 
-  Router = Marionette.AppRouter.extend({
+  Router = Mn.AppRouter.extend({
 
     appRoutes: {
       '': 'homeRoute',
@@ -16,17 +16,14 @@ define(function(require) {
   });
 
   // create controller to store router methods.
-  RouterController = Marionette.Object.extend({
+  RouterObject = Mn.Object.extend({
 
     homeRoute: function() {
-      var app         = require('app')
-        , toolbarView = require('modules/toolbar/toolbar_layout_view')
-
-      Radio.request('rootView', 'show:toolbar', toolbarView);
+      Radio.request('rootView', 'show:mainView');
     }
 
   });
 
-  return new Router({ controller: new RouterController() });
+  return new Router({ controller: new RouterObject() });
 
 });

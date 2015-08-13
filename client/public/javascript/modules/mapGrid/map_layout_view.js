@@ -1,12 +1,13 @@
-define([
-  "app"
-  , "babysitter/app_layout_babysitter"
-],function(App, AppLayoutBabySitter){
+define(function(require) {
 
-  App.Map.Views.MapLayout = Backbone.Marionette.ItemView.extend({
+  var Mn                 = require('marionette')
+    , TileMoverBehavior  = require('./behaviors/tile_mover_behavior')
+    , MapBuilderBehavior = require('./behaviors/build_map_behavior');
+
+  return Mn.ItemView.extend({
 
     attributes: {
-      'data-view-name' : 'map-layout-view',
+      'data-view-name' : 'map_layout_view',
     },
 
     className: "mapGrid",
@@ -14,9 +15,11 @@ define([
     template: "#map_layout",
 
     behaviors: {
-      'TileMover': {},
-      'MapBuilder': {}
+      'TileMoverBehavior'  : {},
+      'MapBuilderBehavior' : {}
     },
+
+    mergeOptions: [],
 
     ui: {},
 
@@ -28,19 +31,13 @@ define([
     },
 
     initialize: function initialize(options) {
-      this.options = _.extend({}, options);
-      this.addToBabySitter();
+      Mn.mergeOptions(this, options, this.mergeOptions);
     },
 
     onRender: function onRender() {
       this.triggerMethod('buildMap');
-    },
-
-    addToBabySitter: function addToBabySitter() {
-      AppLayoutBabySitter.add(this, "BabySitter:App:AppLayout:MapLayout");
     }
 
   });
 
-  return App.Map.Views.MapLayout;
 });

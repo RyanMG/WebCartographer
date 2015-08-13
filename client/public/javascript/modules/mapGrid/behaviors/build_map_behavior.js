@@ -1,16 +1,14 @@
-define([
-  "app"
-], function(App) {
+define(function(require) {
 
-  App.Behaviors.MapBuilder = Backbone.Marionette.Behavior.extend({
+  var Mn = require('marionette');
+
+  return Mn.Behavior.extend({
 
     ui: {
       grid: '#grid'
     },
 
-    events: {
-
-    },
+    events: {},
 
     onBuildMap: function onBuildMap() {
       var height = this.view.options.height * 64
@@ -34,11 +32,9 @@ define([
       });
       for (var i = 1; i < this.view.options.height; i++) {
         $('<div class="grid-line grid-line-v">').css({ left: i * 64 }).appendTo(this.ui.grid);
-      	$('<div class="grid-line grid-line-h">').css({ top: i * 64 }).appendTo(this.ui.grid);
+        $('<div class="grid-line grid-line-h">').css({ top: i * 64 }).appendTo(this.ui.grid);
       }
     }
 
   });
-
-  return App.Behaviors.MapBuilder;
 });

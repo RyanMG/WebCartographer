@@ -16,21 +16,15 @@ define(function(require) {
     },
 
     initialize: function () {
-      Radio.reply('rootView', 'show:toolbar', this.showInToolbarRegion, this);
-      Radio.reply('rootView', 'show:map', this.showInMapRegion, this);
-      Radio.reply('rootView', 'show:dialog', this.showInDialogRegion, this);
+      Radio.reply('rootView', 'show:mainView', this.showMainView, this);
     },
 
-    showInToolbarRegion: function(view) {
-      this.getRegion('toolbar').show( new view() );
-    },
+    showMainView: function(view) {
+      var ToolbarView = require('modules/toolbar/toolbar_layout_view')
+        , MapView     = require('modules/mapGrid/map_layout_view');
 
-    showInMapRegion: function(view) {
-      this.getRegion('toolbar').show( new view() );
-    },
-
-    showInDialogRegion: function(view) {
-      this.getRegion('toolbar').show( new view() );
+      this.getRegion('toolbar').show( new ToolbarView() );
+      this.getRegion('map').show( new MapView() );
     }
   });
 

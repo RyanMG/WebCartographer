@@ -6,6 +6,10 @@ define(function(require) {
 
     template: "#toolbar_layout",
 
+    attributes: {
+      'data-view-name' : 'toolbar_layout_view',
+    },
+
     ui: {
       rotateClockwiseBtn: '#rotate-clockwise',
       rotateCounterBtn: '#rotate-counter-clockwise',
