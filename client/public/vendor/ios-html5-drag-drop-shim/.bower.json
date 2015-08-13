@@ -1,0 +1,12 @@
+{
+  "name": "ios-html5-drag-drop-shim",
+  "homepage": "https://github.com/jmeas/ios-html5-drag-drop-shim",
+  "_release": "57319bb1df",
+  "_resolution": {
+    "type": "commit",
+    "commit": "57319bb1df3f072bde8ea0"
+  },
+  "_source": "ssh://git@github.com/jmeas/ios-html5-drag-drop-shim.git",
+  "_target": "57319bb1df3f072bde8ea0",
+  "_originalSource": "ssh://git@github.com/jmeas/ios-html5-drag-drop-shim.git"
+}
