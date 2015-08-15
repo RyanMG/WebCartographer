@@ -28,17 +28,11 @@ module.exports = function(grunt) {
     watch: {
       compileStylus: {
         files: [ 'resources/sass/**/*.scss' ],
-        tasks: [ 'compileSass' ],
-        options: {
-          livereload: true
-        }
+        tasks: [ 'compileSass' ]
       },
       compileJade: {
         files: [ 'resources/jade/**/*.jade' ],
-        tasks: [ 'compileJade' ],
-        options: {
-          livereload: true
-        }
+        tasks: [ 'compileJade' ]
       }
     }
   });

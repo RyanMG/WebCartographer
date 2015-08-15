@@ -1,57 +1,11 @@
-.hidden
-  display none
-  visibility invisible
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  background-color: $app-background-color;
+}
 
-html, body
-  height: 100%
-  width: 100%
-  overflow: hidden
-  margin: 0
-  background-color: #222
-
-body
-  perspective(500)
-
-#app-map-region
-
-  .mapGrid
-    position: fixed
-    left: 50%
-    top: 50%
-    background-color: #000
-    overflow:hidden
-
-    #grid
-      border: 2px solid #DDD
-      position: fixed
-      left: 50%
-      top: 50%
-      background-color: transparent
-      overflow: hidden
-
-      .grid-line {
-        position: absolute;
-        top: 0;
-        opacity: 0.6;
-        &.grid-line-v {
-          width: 1px;
-          height: 100%;
-          border-left: 1px solid #ddd;
-        }
-        &.grid-line-h {
-          width: 100%;
-          height: 1px;
-          border-top: 1px solid #ddd;
-        }
-      }
-
-    .tile
-      background: #fff
-      opacity: 0.9
-      position: absolute
-      cursor: pointer
-      &.selected
-        opacity: 1.0
-        border: 1px solid #fff
-      &.animate
-        transition(all .3s)
+body {
+  @include perspective(500);
+}

@@ -1,22 +1,60 @@
-#app-toolbar-region
+.toolbar-region {
+  position: fixed;
+  height: 50px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #999;
 
-  #toolbar
-    position: fixed
-    height: 50px
-    width: 100%
-    top: 0
-    left: 0
-    background: #999
+  .toolbar {
+    padding: 5px 10px;
 
-    button, select
-      height: 40px
-      width: 141px
-      font-size: 10px
-      text-align: center
-      float: left
-      margin-right: 15px
-      &:last-child
-        margin-right: 0px
+    .left-toolbar-btns {
+      float: left;
+    }
+    .right-toolbar-btns {
+      float: right;
+    }
 
-    select
-      margin-top: 11px
+    select,
+    button {
+      float: left;
+      margin-right: 15px;
+    }
+
+    button {
+      height: 40px;
+      width: 50px;
+      font-size: 0.6rem;
+      text-align: center;
+
+      &:last-child {
+        margin-right: 0px;
+      }
+
+      @include media-desktop-only {
+        width: 141px;
+      }
+
+      span {
+        display: none;
+
+        @include media-desktop-only {
+          display: block;
+        }
+      }
+
+      i {
+        display: inline;
+
+        @include media-desktop-only {
+          display: none;
+        }
+      }
+    }
+
+    select {
+      margin-top: 11px;
+    }
+  }
+}

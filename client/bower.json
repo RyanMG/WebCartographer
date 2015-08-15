@@ -11,6 +11,7 @@
     "marionette": "#2.4.2",
     "requirejs": "#2.1.2",
     "handlebars": "#3.0.3",
-    "ios-html5-drag-drop-shim": "ssh://git@github.com/jmeas/ios-html5-drag-drop-shim.git#57319bb1df3f072bde8ea0"
+    "ios-html5-drag-drop-shim": "ssh://git@github.com/jmeas/ios-html5-drag-drop-shim.git#57319bb1df3f072bde8ea0",
+    "material-design-icons": "~2.0.0"
   }
 }

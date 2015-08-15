@@ -1,4 +1,12 @@
-@import 'vendor-includes'
-@import 'main-body'
-@import 'toolbar'
-@import 'dialog'
+@import 'variables';
+@import 'mixins';
+
+@import 'main-body';
+@import 'type';
+
+@import 'toolbar';
+@import 'map-grid';
+@import 'dialog';
+
+// This includes some utility classes that need prority, so it should be last
+@import 'utilities';

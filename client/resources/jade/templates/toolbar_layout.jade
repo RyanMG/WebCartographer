@@ -1,13 +1,27 @@
-div#toolbar
-  button#rotate-counter-clockwise Rotate Counter-Clockwise
-  button#rotate-clockwise Rotate Clockwise
-  select#tileTypePicker
-    option stone_tiles_2x2_01
-    option stone_tiles_4x4_01
-    option stone_altar_4x4_01
-    option stone_pit_2x4_01
-    option stone_stairs_2x2_01
-    option stone_stairs_2x2_02
-    option black_pit_2x4_01
-  button#new-tile New Tile
-  button#clear-tiles Clear Map
+div.toolbar
+  section.left-toolbar-btns
+    button#new-tile
+      span New Tile
+      i.material-icons add_circle
+
+    select#tileTypePicker
+      option stone_tiles_2x2_01
+      option stone_tiles_4x4_01
+      option stone_altar_4x4_01
+      option stone_pit_2x4_01
+      option stone_stairs_2x2_01
+      option stone_stairs_2x2_02
+      option black_pit_2x4_01
+
+    button#clear-tiles
+      span Clear Map
+      i.material-icons clear
+
+  section.right-toolbar-btns
+    button#rotate-counter-clockwise
+      span Rotate Counter-Clockwise
+      i.material-icons rotate_left
+
+    button#rotate-clockwise
+      span Rotate Clockwise
+      i.material-icons rotate_right

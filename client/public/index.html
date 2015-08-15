@@ -17,24 +17,29 @@
       <div id="app-dialog-region"></div>
     </script>
     <script id="toolbar_layout" type="text/x-handlebars-template">
-      <div id="toolbar">
-        <button id="rotate-counter-clockwise">Rotate Counter-Clockwise</button>
-        <button id="rotate-clockwise">Rotate Clockwise</button>
-        <select id="tileTypePicker">
-          <option>stone_tiles_2x2_01</option>
-          <option>stone_tiles_4x4_01</option>
-          <option>stone_altar_4x4_01</option>
-          <option>stone_pit_2x4_01</option>
-          <option>stone_stairs_2x2_01</option>
-          <option>stone_stairs_2x2_02</option>
-          <option>black_pit_2x4_01</option>
-        </select>
-        <button id="new-tile">New Tile</button>
-        <button id="clear-tiles">Clear Map</button>
+      <div class="toolbar">
+        <section class="left-toolbar-btns">
+          <button id="new-tile"><span>New Tile</span><i class="material-icons">add_circle</i></button>
+          <select id="tileTypePicker">
+            <option>stone_tiles_2x2_01</option>
+            <option>stone_tiles_4x4_01</option>
+            <option>stone_altar_4x4_01</option>
+            <option>stone_pit_2x4_01</option>
+            <option>stone_stairs_2x2_01</option>
+            <option>stone_stairs_2x2_02</option>
+            <option>black_pit_2x4_01</option>
+          </select>
+          <button id="clear-tiles"><span>Clear Map</span><i class="material-icons">clear</i></button>
+        </section>
+        <section class="right-toolbar-btns">
+          <button id="rotate-counter-clockwise"><span>Rotate Counter-Clockwise</span><i class="material-icons">rotate_left</i></button>
+          <button id="rotate-clockwise"><span>Rotate Clockwise</span><i class="material-icons">rotate_right</i></button>
+        </section>
       </div>
     </script>
     <script id="map_layout" type="text/x-handlebars-template">
       <div id="grid"></div>
+      <div id="tiles"></div>
     </script>
     <script id="dialog_template" type="text/x-handlebars-template">
       <form id="newMapForm">

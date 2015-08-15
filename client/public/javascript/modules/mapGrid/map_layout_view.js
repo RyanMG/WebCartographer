@@ -26,7 +26,10 @@ define(function(require) {
 
     mergeOptions: ['height', 'width', 'bg_texture'],
 
-    ui: {},
+    ui: {
+      grid  : '#grid',
+      tiles : '#tiles'
+    },
 
     events: {
       "click": "onMapGridClick"
@@ -48,7 +51,7 @@ define(function(require) {
     },
 
     addNewTile: function($tileImage) {
-      this.$el.append($tileImage);
+      this.ui.tiles.append($tileImage);
       this.triggerMethod('initializeTile', $tileImage);
     },
 

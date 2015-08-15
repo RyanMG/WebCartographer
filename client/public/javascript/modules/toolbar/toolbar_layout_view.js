@@ -1,7 +1,8 @@
 define(function(require) {
 
   var Mn    = require('marionette')
-    , Radio = require('backbone.radio');
+    , Radio = require('backbone.radio')
+    , _     = require('underscore');
 
   return Mn.ItemView.extend({
 
@@ -10,6 +11,8 @@ define(function(require) {
     attributes: {
       'data-view-name' : 'toolbar_layout_view',
     },
+
+    className: 'toolbar-region',
 
     ui: {
       rotateClockwiseBtn: '#rotate-clockwise',
@@ -26,13 +29,13 @@ define(function(require) {
       "click @ui.clearMapBtn": "onClearTilesBtnClick"
     },
 
-    onRotateClockwiseClick: function() {
+    onRotateClockwiseClick: _.throttle(function() {
       Radio.request('mapView', 'rotateClockwise');
-    },
+    }, 400, {trailing: false}),
 
-    onRotateCounterBtnClick: function() {
+    onRotateCounterBtnClick: _.throttle(function() {
       Radio.request('mapView', 'rotateCounterClockwise');
-    },
+    }, 400, {trailing: false}),
 
     onNewTileBtnClick: function() {
       var tileType = this.ui.tilePicker.val()

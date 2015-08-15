@@ -1,90 +1,168 @@
-.hidden {
-  display: none;
-  visibility: invisible;
-}
-html,
-body {
+/**
+ * Desktop will be greater than 1024px ( width > 1024px)
+ * Tablet will be between 640px and 1024px ( width > 640px && width <= 1024px)
+ * Mobile will be less than or equal to 640px ( width <= 640 )
+ */
+html, body {
   height: 100%;
   width: 100%;
   overflow: hidden;
   margin: 0;
-  background-color: #222;
-}
+  background-color: #222; }
+
 body {
   -webkit-perspective: 500;
-  -moz-perspective: 500;
-  perspective: 500;
-}
-#app-map-region .mapGrid {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  background-color: #000;
-  overflow: hidden;
-}
-#app-map-region .mapGrid #grid {
-  border: 2px solid #ddd;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  background-color: transparent;
-  overflow: hidden;
-}
-#app-map-region .mapGrid #grid .grid-line {
-  position: absolute;
-  top: 0;
-  opacity: 0.6;
-}
-#app-map-region .mapGrid #grid .grid-line.grid-line-v {
-  width: 1px;
-  height: 100%;
-  border-left: 1px solid #ddd;
-}
-#app-map-region .mapGrid #grid .grid-line.grid-line-h {
-  width: 100%;
-  height: 1px;
-  border-top: 1px solid #ddd;
-}
-#app-map-region .mapGrid .tile {
-  background: #fff;
-  opacity: 0.9;
-  position: absolute;
-  cursor: pointer;
-}
-#app-map-region .mapGrid .tile.selected {
-  opacity: 1;
-  border: 1px solid #fff;
-}
-#app-map-region .mapGrid .tile.animate {
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;
-}
-#app-toolbar-region #toolbar {
+  perspective: 500; }
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../vendor/material-design-icons/iconfont/MaterialIcons-Regular.eot);
+  /* For IE6-8 */
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url(../vendor/material-design-icons/iconfont/MaterialIcons-Regular.woff2) format("woff2"), url(../vendor/material-design-icons/iconfont/MaterialIcons-Regular.woff) format("woff"), url(../vendor/material-design-icons/iconfont/MaterialIcons-Regular.ttf) format("truetype"); }
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: 'liga'; }
+
+html {
+  font-size: 16px; }
+
+.toolbar-region {
   position: fixed;
   height: 50px;
   width: 100%;
   top: 0;
   left: 0;
-  background: #999;
-}
-#app-toolbar-region #toolbar button,
-#app-toolbar-region #toolbar select {
-  height: 40px;
-  width: 141px;
-  font-size: 10px;
-  text-align: center;
-  float: left;
-  margin-right: 15px;
-}
-#app-toolbar-region #toolbar button:last-child,
-#app-toolbar-region #toolbar select:last-child {
-  margin-right: 0px;
-}
-#app-toolbar-region #toolbar select {
-  margin-top: 11px;
-}
-#app-dialog-region .dialog {
+  background: #999; }
+  .toolbar-region .toolbar {
+    padding: 5px 10px; }
+    .toolbar-region .toolbar .left-toolbar-btns {
+      float: left; }
+    .toolbar-region .toolbar .right-toolbar-btns {
+      float: right; }
+    .toolbar-region .toolbar select,
+    .toolbar-region .toolbar button {
+      float: left;
+      margin-right: 15px; }
+    .toolbar-region .toolbar button {
+      height: 40px;
+      width: 50px;
+      font-size: 0.6rem;
+      text-align: center; }
+      .toolbar-region .toolbar button:last-child {
+        margin-right: 0px; }
+      @media (min-width: 1025px) {
+        .toolbar-region .toolbar button {
+          width: 141px; } }
+      .toolbar-region .toolbar button span {
+        display: none; }
+        @media (min-width: 1025px) {
+          .toolbar-region .toolbar button span {
+            display: block; } }
+      .toolbar-region .toolbar button i {
+        display: inline; }
+        @media (min-width: 1025px) {
+          .toolbar-region .toolbar button i {
+            display: none; } }
+    .toolbar-region .toolbar select {
+      margin-top: 11px; }
+
+.mapGrid {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  background-color: #000;
+  overflow: hidden; }
+  .mapGrid #grid {
+    border: 2px solid #DDD;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    background-color: transparent;
+    overflow: hidden; }
+    .mapGrid #grid .grid-line {
+      position: absolute;
+      top: 0;
+      opacity: 0.6; }
+      .mapGrid #grid .grid-line.grid-line-v {
+        width: 1px;
+        height: 100%;
+        border-left: 1px solid #ddd; }
+      .mapGrid #grid .grid-line.grid-line-h {
+        width: 100%;
+        height: 1px;
+        border-top: 1px solid #ddd; }
+  .mapGrid #tiles .tile {
+    background: #fff;
+    opacity: 0.9;
+    position: absolute;
+    cursor: pointer; }
+    .mapGrid #tiles .tile.selected {
+      opacity: 1.0;
+      border: 1px solid #fff; }
+    .mapGrid #tiles .tile.animated {
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      -o-transition: all 0.3s;
+      transition: all 0.3s; }
+    .mapGrid #tiles .tile.rotate-0 {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg); }
+    .mapGrid #tiles .tile.rotate-90 {
+      -webkit-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      -o-transform: rotate(90deg);
+      transform: rotate(90deg); }
+    .mapGrid #tiles .tile.rotate-180 {
+      -webkit-transform: rotate(180deg);
+      -moz-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+      transform: rotate(180deg); }
+    .mapGrid #tiles .tile.rotate-270 {
+      -webkit-transform: rotate(270deg);
+      -moz-transform: rotate(270deg);
+      -ms-transform: rotate(270deg);
+      -o-transform: rotate(270deg);
+      transform: rotate(270deg); }
+    .mapGrid #tiles .tile.rotate-360 {
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg); }
+    .mapGrid #tiles .tile.rotate--90 {
+      -webkit-transform: rotate(-90deg);
+      -moz-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+      -o-transform: rotate(-90deg);
+      transform: rotate(-90deg); }
+
+.dialog {
   height: 200px;
   width: 300px;
   position: fixed;
@@ -92,24 +170,25 @@ body {
   left: 50%;
   margin-top: -100px;
   margin-left: -150px;
-  background: #fff;
-  padding: 20px;
-}
-#app-dialog-region .dialog label {
-  display: block;
-  margin: 10px 0;
-}
-#app-dialog-region .dialog input {
-  display: inline;
-  width: 100px;
-}
-#app-dialog-region .dialog p {
-  display: inline;
-  padding: 0 5px;
-}
-#app-dialog-region .dialog button {
-  height: 30px;
-  width: 200px;
-  display: block;
-  margin: 30px auto 10px;
-}
+  background: #ffffff;
+  padding: 20px; }
+  .dialog label {
+    display: block;
+    margin: 10px 0; }
+  .dialog input {
+    display: inline;
+    width: 100px; }
+  .dialog p {
+    display: inline;
+    padding: 0 5px; }
+  .dialog button {
+    height: 30px;
+    width: 200px;
+    display: block;
+    margin: 30px auto 10px; }
+
+.hidden {
+  display: none;
+  visibility: invisible; }
+
+/*# sourceMappingURL=main.css.map */

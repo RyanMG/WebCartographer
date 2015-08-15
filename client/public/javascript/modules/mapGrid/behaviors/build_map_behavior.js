@@ -4,10 +4,6 @@ define(function(require) {
 
   return Mn.Behavior.extend({
 
-    ui: {
-      grid: '#grid'
-    },
-
     events: {},
 
     onBuildMap: function onBuildMap() {
@@ -24,7 +20,7 @@ define(function(require) {
         'margin-left': left,
         'background-image': texture
       });
-      this.ui.grid.css({
+      this.view.ui.grid.css({
         'height': height,
         'width': width,
         'margin-top': top - 2,
