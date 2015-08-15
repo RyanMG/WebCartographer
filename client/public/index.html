@@ -14,6 +14,7 @@
     <script id="app_layout" type="text/x-handlebars-template">
       <div id="app-toolbar-region"></div>
       <div id="app-map-region" class="full-h-w"></div>
+      <div id="app-tile-picker-region"></div>
       <div id="app-dialog-region"></div>
     </script>
     <script id="toolbar_layout" type="text/x-handlebars-template">
@@ -42,6 +43,11 @@
         <section id="map-backdrop"></section>
         <section id="grid"></section>
         <section id="tiles" class="full-h-w"></section>
+      </div>
+    </script>
+    <script id="tile_picker_layout" type="text/x-handlebars-template">
+      <div id="picker-window">
+        <div class="tile-list"></div>
       </div>
     </script>
     <script id="dialog_template" type="text/x-handlebars-template">
