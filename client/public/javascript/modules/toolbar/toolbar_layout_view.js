@@ -18,7 +18,6 @@ define(function(require) {
       rotateClockwiseBtn: '#rotate-clockwise',
       rotateCounterBtn: '#rotate-counter-clockwise',
       newTileBtn: '#new-tile',
-      tilePicker: '#tileTypePicker',
       clearMapBtn: '#clear-tiles'
     },
 
@@ -38,15 +37,7 @@ define(function(require) {
     }, 400, {trailing: false}),
 
     onNewTileBtnClick: function() {
-      var tileType = this.ui.tilePicker.val()
-        , size     = tileType.split('_')[2].split('x')
-        , $tileImg = $('<img>').addClass('tile').attr('src', './img/' + tileType + '.jpg');
-
-      $tileImg.css({
-        'height' : size[0] * 64,
-        'width' : size[1] * 64
-      });
-      Radio.request('mapView', 'addNewTile', $tileImg);
+      Radio.request('tilePickerView', 'toggleOpen');
     },
 
     onClearTilesBtnClick: function() {

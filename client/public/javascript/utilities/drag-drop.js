@@ -8,6 +8,8 @@ define(function(require) {
     this.dragImageTransform = null;
     this.dragImageWebKitTransform = null;
     this.el = el || event.target;
+    this.isTouch = isTouch || false;
+    this.moveHandler, this.endHandler, this.canceHandler;
 
     if (isTouch) {
       this.dispatchDragStart();
@@ -18,23 +20,25 @@ define(function(require) {
       this.setupDragImage(event, el);
     }
 
-    this.listen(isTouch);
+    this.listen();
   }
 
   DragDrop.prototype = {
 
-    listen: function(isTouch) {
-      if (isTouch) {
-        var move   = _onEvt(doc, "touchmove", this.move, this)
-          , end    = _onEvt(doc, "touchend", ontouchend, this)
-          , cancel = _onEvt(doc, "touchcancel", this.cleanup, this);
+    listen: function() {
+
+      if (this.isTouch) {
+        this.moveHandler  = _onEvt(document, "touchmove", this.move, this)
+        this.endHandler   = _onEvt(document, "touchend", ontouchend, this)
+        this.canceHandler = _onEvt(document, "touchcancel", this.cleanup, this);
 
       } else {
-        // _onEvt(document, "dragend", this.dragend, this);
+        this.end = _onEvt(document, "dragend", this.cleanup, this);
       }
 
       function ontouchend(event) {
         this.dragend(event, event.target);
+        this.cleanup();
       }
     },
 
@@ -47,8 +51,10 @@ define(function(require) {
         this.dragImageWebKitTransform = null;
       }
       this.el = this.dragData = null;
-      return [move, end, cancel].forEach(function(handler) {
-        return handler.off();
+      return [this.moveHandler, this.endHandler, this.canceHandler].forEach(function(handler) {
+        if (handler) {
+          return handler.off();
+        }
       });
     },
 
@@ -79,7 +85,7 @@ define(function(require) {
 
     // We use translate instead of top/left because of sub-pixel rendering and for the hope of better performance
     // http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
-    translateDragImage: function(x, y) {
+    translateDragImage: function(x, y, zIndex) {
       var translate = " translate(" + x + "px," + y + "px)";
 
       if (this.dragImageWebKitTransform !== null) {
@@ -88,29 +94,24 @@ define(function(require) {
       if (this.dragImageTransform !== null) {
         this.dragImage.style["transform"] = this.dragImageTransform + translate;
       }
+      if ( !_.isUndefined(zIndex) ) {
+        this.dragImage.style["z-index"] = zIndex;
+      }
     },
 
     dragend: function(event) {
-
-      if (this.lastEnter) {
-        this.dispatchLeave(event);
-      }
 
       this.hideDragImage();
       var target = elementFromTouchEvent(this.el,event)
       this.showDragImage();
 
       if (target) {
-        log("found drop target " + target.tagName);
         this.dispatchDrop(target, event)
-      } else {
-        log("no drop target")
       }
 
       var dragendEvt = doc.createEvent("Event");
       dragendEvt.initEvent("dragend", true, true);
       this.el.dispatchEvent(dragendEvt);
-      this.cleanup();
     },
 
     dispatchDrop: function(target, event) {
@@ -140,61 +141,6 @@ define(function(require) {
       target.dispatchEvent(dropEvt);
     },
 
-    dispatchEnter: function(event) {
-
-      var enterEvt = doc.createEvent("Event");
-      enterEvt.initEvent("dragenter", true, true);
-      enterEvt.dataTransfer = {
-        types: this.dragDataTypes,
-        getData: function(type) {
-          return this.dragData[type];
-        }.bind(this)
-      };
-
-      var touch = event.changedTouches[0];
-      enterEvt.pageX = touch.pageX;
-      enterEvt.pageY = touch.pageY;
-
-      this.lastEnter.dispatchEvent(enterEvt);
-    },
-
-    dispatchOver: function(event) {
-
-      var overEvt = doc.createEvent("Event");
-      overEvt.initEvent("dragover", true, true);
-      overEvt.dataTransfer = {
-        types: this.dragDataTypes,
-        getData: function(type) {
-          return this.dragData[type];
-        }.bind(this)
-      };
-
-      var touch = event.changedTouches[0];
-      overEvt.pageX = touch.pageX;
-      overEvt.pageY = touch.pageY;
-
-      this.lastEnter.dispatchEvent(overEvt);
-    },
-
-    dispatchLeave: function(event) {
-
-      var leaveEvt = doc.createEvent("Event");
-      leaveEvt.initEvent("dragleave", true, true);
-      leaveEvt.dataTransfer = {
-        types: this.dragDataTypes,
-        getData: function(type) {
-          return this.dragData[type];
-        }.bind(this)
-      };
-
-      var touch = event.changedTouches[0];
-      leaveEvt.pageX = touch.pageX;
-      leaveEvt.pageY = touch.pageY;
-
-      this.lastEnter.dispatchEvent(leaveEvt);
-      this.lastEnter = null;
-    },
-
     dispatchDragStart: function() {
       var evt = doc.createEvent("Event");
       evt.initEvent("dragstart", true, true);
@@ -214,7 +160,7 @@ define(function(require) {
     setupDragImage: function(evt, el) {
       if ( 'setDragImage' in evt.originalEvent.dataTransfer) {
         var dragImgNode = this.createDragImage();
-        this.translateDragImage(0, 0);
+        this.translateDragImage(0, 0, -1);
         evt.originalEvent.dataTransfer.setDragImage(dragImgNode, 0, 0);
         el.classList.add('is-being-dragged')
       }
