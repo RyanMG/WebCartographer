@@ -103,7 +103,8 @@ define(function(require) {
     },
 
     clearMap: function() {
-      this.$el.empty();
+      this.triggerMethod('clearCurrentElement');
+      this.ui.tiles.empty();
     }
 
   });

@@ -6,6 +6,7 @@ require([
 
   require([
     'app',
+    'modernizr',
     'extends/all_extends'
   ], function(app) {
 

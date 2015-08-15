@@ -14,8 +14,7 @@
     "backbone.radio": "../vendor/backbone.radio/build/backbone.radio",
     "backbone.babysitter": "../vendor/backbone.babysitter/lib/backbone.babysitter",
     jquery: "../vendor/jquery/dist/jquery",
-    handlebars: "../vendor/handlebars/handlebars.amd",
-    "drag-and-drop-shim": "../vendor/ios-html5-drag-drop-shim/ios-drag-drop"
+    handlebars: "../vendor/handlebars/handlebars.amd"
   };
 
   requireConfig.shim = {
@@ -29,9 +28,6 @@
     },
     "handlebars": {
       exports: "Handlebars"
-    },
-    "drag-and-drop-shim": {
-      deps: ["modernizr"]
     }
   };
 

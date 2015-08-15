@@ -168,6 +168,16 @@ html {
         -o-transform: rotate(-90deg);
         transform: rotate(-90deg); }
 
+[draggable] {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -webkit-user-drag: element;
+  -khtml-user-drag: element; }
+
 .dialog {
   height: 200px;
   width: 300px;
