@@ -48,11 +48,8 @@ html {
   font-size: 16px; }
 
 .toolbar-region {
-  position: fixed;
   height: 50px;
   width: 100%;
-  top: 0;
-  left: 0;
   background: #999; }
   .toolbar-region .toolbar {
     padding: 5px 10px; }
@@ -88,16 +85,21 @@ html {
       margin-top: 11px; }
 
 .mapGrid {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  background-color: #000;
-  overflow: hidden; }
-  .mapGrid #grid {
-    border: 2px solid #DDD;
-    position: fixed;
+  position: relative;
+  width: 100%;
+  height: calc(100% - 50px); }
+  .mapGrid #map-wrapper {
+    position: absolute;
     left: 50%;
     top: 50%;
+    background-color: #000; }
+  .mapGrid #map-backdrop {
+    height: 100%;
+    width: 100%; }
+  .mapGrid #grid {
+    position: absolute;
+    left: 0;
+    top: 0;
     background-color: transparent;
     overflow: hidden; }
     .mapGrid #grid .grid-line {
@@ -112,55 +114,59 @@ html {
         width: 100%;
         height: 1px;
         border-top: 1px solid #ddd; }
-  .mapGrid #tiles .tile {
-    background: #fff;
-    opacity: 0.9;
+  .mapGrid #tiles {
     position: absolute;
-    cursor: pointer; }
-    .mapGrid #tiles .tile.selected {
-      opacity: 1.0;
-      border: 1px solid #fff; }
-    .mapGrid #tiles .tile.animated {
-      -webkit-transition: all 0.3s;
-      -moz-transition: all 0.3s;
-      -o-transition: all 0.3s;
-      transition: all 0.3s; }
-    .mapGrid #tiles .tile.rotate-0 {
-      -webkit-transform: rotate(0deg);
-      -moz-transform: rotate(0deg);
-      -ms-transform: rotate(0deg);
-      -o-transform: rotate(0deg);
-      transform: rotate(0deg); }
-    .mapGrid #tiles .tile.rotate-90 {
-      -webkit-transform: rotate(90deg);
-      -moz-transform: rotate(90deg);
-      -ms-transform: rotate(90deg);
-      -o-transform: rotate(90deg);
-      transform: rotate(90deg); }
-    .mapGrid #tiles .tile.rotate-180 {
-      -webkit-transform: rotate(180deg);
-      -moz-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
-      -o-transform: rotate(180deg);
-      transform: rotate(180deg); }
-    .mapGrid #tiles .tile.rotate-270 {
-      -webkit-transform: rotate(270deg);
-      -moz-transform: rotate(270deg);
-      -ms-transform: rotate(270deg);
-      -o-transform: rotate(270deg);
-      transform: rotate(270deg); }
-    .mapGrid #tiles .tile.rotate-360 {
-      -webkit-transform: rotate(360deg);
-      -moz-transform: rotate(360deg);
-      -ms-transform: rotate(360deg);
-      -o-transform: rotate(360deg);
-      transform: rotate(360deg); }
-    .mapGrid #tiles .tile.rotate--90 {
-      -webkit-transform: rotate(-90deg);
-      -moz-transform: rotate(-90deg);
-      -ms-transform: rotate(-90deg);
-      -o-transform: rotate(-90deg);
-      transform: rotate(-90deg); }
+    top: 0;
+    left: 0; }
+    .mapGrid #tiles .tile {
+      background: #fff;
+      opacity: 0.9;
+      position: absolute;
+      cursor: pointer; }
+      .mapGrid #tiles .tile.selected {
+        opacity: 1.0;
+        border: 1px solid #fff; }
+      .mapGrid #tiles .tile.animated {
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s; }
+      .mapGrid #tiles .tile.rotate-0 {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg); }
+      .mapGrid #tiles .tile.rotate-90 {
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg); }
+      .mapGrid #tiles .tile.rotate-180 {
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        transform: rotate(180deg); }
+      .mapGrid #tiles .tile.rotate-270 {
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+        -o-transform: rotate(270deg);
+        transform: rotate(270deg); }
+      .mapGrid #tiles .tile.rotate-360 {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg); }
+      .mapGrid #tiles .tile.rotate--90 {
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform: rotate(-90deg); }
 
 .dialog {
   height: 200px;
@@ -190,5 +196,9 @@ html {
 .hidden {
   display: none;
   visibility: invisible; }
+
+.full-h-w {
+  height: 100%;
+  width: 100%; }
 
 /*# sourceMappingURL=main.css.map */

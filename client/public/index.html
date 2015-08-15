@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="./stylesheets/main.css">
   </head>
   <body>
-    <div id="main-region"></div>
+    <div id="main-region" class="full-h-w"></div>
     <script id="app_layout" type="text/x-handlebars-template">
       <div id="app-toolbar-region"></div>
-      <div id="app-map-region"></div>
+      <div id="app-map-region" class="full-h-w"></div>
       <div id="app-dialog-region"></div>
     </script>
     <script id="toolbar_layout" type="text/x-handlebars-template">
@@ -38,8 +38,11 @@
       </div>
     </script>
     <script id="map_layout" type="text/x-handlebars-template">
-      <div id="grid"></div>
-      <div id="tiles"></div>
+      <div id="map-wrapper">
+        <section id="map-backdrop"></section>
+        <section id="grid"></section>
+        <section id="tiles" class="full-h-w"></section>
+      </div>
     </script>
     <script id="dialog_template" type="text/x-handlebars-template">
       <form id="newMapForm">

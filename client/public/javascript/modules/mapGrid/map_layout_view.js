@@ -2,8 +2,7 @@ define(function(require) {
 
   var Mn                 = require('marionette')
     , Radio              = require('backbone.radio')
-    , TileMoverBehavior  = require('./behaviors/tile_mover_behavior')
-    , MapBuilderBehavior = require('./behaviors/build_map_behavior');
+    , TileMoverBehavior  = require('./behaviors/tile_mover_behavior');
 
   return Mn.ItemView.extend({
 
@@ -16,30 +15,37 @@ define(function(require) {
     template: "#map_layout",
 
     behaviors: {
-      'TileMoverBehavior'  : {
+      'TileMoverBehavior': {
         behaviorClass: TileMoverBehavior
-      },
-      'MapBuilderBehavior' : {
-        behaviorClass: MapBuilderBehavior
       }
     },
 
     mergeOptions: ['height', 'width', 'bg_texture'],
 
     ui: {
-      grid  : '#grid',
-      tiles : '#tiles'
+      wrapper  : '#map-wrapper',
+      backdrop : '#map-backdrop',
+      grid     : '#grid',
+      tiles    : '#tiles'
     },
 
-    events: {
-      "click": "onMapGridClick"
-    },
-
-    onMapGridClick: function(evt) {
-    },
+    events: {},
 
     initialize: function(options) {
       Mn.mergeOptions(this, options, this.mergeOptions);
+      this.setupMapVariables();
+      this.addListeners();
+    },
+
+    setupMapVariables: function() {
+      this.numHeightTiles = this.height;
+      this.numWidthTiles  = this.width;
+      this.height *= 64;
+      this.width *= 64;
+
+    },
+
+    addListeners: function() {
       Radio.reply('mapView', 'rotateClockwise', this.rotateClockwise, this);
       Radio.reply('mapView', 'rotateCounterClockwise', this.rotateCounterClockwise, this);
       Radio.reply('mapView', 'addNewTile', this.addNewTile, this);
@@ -47,7 +53,40 @@ define(function(require) {
     },
 
     onRender: function() {
-      this.triggerMethod('buildMap');
+      this.buildMap();
+      this.addGrid();
+    },
+
+    buildMap: function() {
+      var texture = 'url(img/' + this.bg_texture + '_floor_bg.jpg)'
+        , top     = 0 - (this.height / 2)
+        , left    = 0 - (this.width / 2);
+
+      this.ui.wrapper.css({
+        'height': this.height,
+        'width': this.width,
+        'margin-top': top,
+        'margin-left': left
+      });
+
+      this.ui.backdrop.css({
+        'background-image': texture
+      });
+    },
+
+    addGrid: function() {
+      this.ui.grid.css({
+        'height': this.height,
+        'width': this.width
+      });
+
+      for (var i = 1; i < this.numHeightTiles; i++) {
+        $('<div class="grid-line grid-line-v">').css({ left: i * 64 }).appendTo(this.ui.grid);
+      }
+
+      for (var i = 1; i < this.numWidthTiles; i++) {
+        $('<div class="grid-line grid-line-h">').css({ top: i * 64 }).appendTo(this.ui.grid);
+      }
     },
 
     addNewTile: function($tileImage) {
