@@ -13,36 +13,12 @@
       float: right;
     }
 
-    button {
-      height: 40px;
-      width: 50px;
-      font-size: 0.6rem;
-      text-align: center;
+    .btn {
       float: left;
       margin-right: 15px;
 
       &:last-child {
         margin-right: 0px;
-      }
-
-      @include media-desktop-only {
-        width: 141px;
-      }
-
-      span {
-        display: none;
-
-        @include media-desktop-only {
-          display: block;
-        }
-      }
-
-      i {
-        display: inline;
-
-        @include media-desktop-only {
-          display: none;
-        }
       }
     }
   }

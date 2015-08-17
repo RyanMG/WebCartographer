@@ -3,8 +3,7 @@ define(function(require) {
   var Mn       = require('marionette')
     , Radio    = require('backbone.radio')
     , _        = require('underscore')
-    , DragDrop = require('../../utilities/drag-drop')
-;
+    , DragDrop = require('../../utilities/drag-drop');
 
   return Mn.ItemView.extend({
 
@@ -22,12 +21,8 @@ define(function(require) {
 
     events: {
       'touchstart @ui.icon': 'onTouchStart',
-      'dragstart @ui.icon': 'onDragStart',
-      'dragend @ui.icon'  : 'onDragEnd'
-    },
-
-    preventDefaultAction: function(evt) {
-      evt.preventDefault();
+      'dragstart @ui.icon' : 'onDragStart',
+      'dragend @ui.icon'   : 'onDragEnd'
     },
 
     initialize: function() {
@@ -43,12 +38,11 @@ define(function(require) {
     }, 550, {trailing: false}),
 
     onDragStart: function(evt) {
-      new DragDrop(evt, evt.target, false);
       this.toggleOpen(false);
+      evt.originalEvent.dataTransfer.setData( 'text', evt.target.src );
     },
 
     onTouchStart: function(evt) {
-      new DragDrop(evt, evt.target, true);
       this.toggleOpen(false);
     },
 

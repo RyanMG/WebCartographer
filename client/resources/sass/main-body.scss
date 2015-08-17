@@ -9,3 +9,37 @@ html, body {
 body {
   @include perspective(500);
 }
+
+.btn {
+  display: inline-block;
+  word-spacing: normal;
+  letter-spacing: normal;
+  cursor: pointer;
+  padding: 8px 5px;
+  height: 24px;
+  width: 40px;
+  font-size: 0.6rem;
+  text-align: center;
+  background-color: $light-gray;
+
+  @include media-desktop-only {
+    width: 141px;
+  }
+
+  span {
+  	padding-top: 8px;
+    display: none;
+
+    @include media-desktop-only {
+      display: block;
+    }
+  }
+
+  i {
+    display: inline;
+
+    @include media-desktop-only {
+      display: none;
+    }
+  }
+}

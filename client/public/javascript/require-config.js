@@ -45,7 +45,7 @@
     useStrict: true,
     findNestedDependencies: true,
     // Cache-bust
-    urlArgs: "bust=" + (new Date()).getTime(),
+    // urlArgs: "bust=" + (new Date()).getTime(),
     waitSeconds: 30,
     paths: requireConfig.paths,
     shim: requireConfig.shim

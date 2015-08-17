@@ -166,7 +166,7 @@ define(function(require) {
     setupDragImage: function(evt, el) {
       if ( 'setDragImage' in evt.originalEvent.dataTransfer) {
         var dragImgNode = this.createDragImage();
-        this.translateDragImage(0, 0, -1);
+        // this.translateDragImage(0, 0, -1);
         evt.originalEvent.dataTransfer.setDragImage(dragImgNode, 0, 0);
         el.classList.add('is-being-dragged')
       }

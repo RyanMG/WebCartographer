@@ -2,6 +2,7 @@ define(function(require) {
 
   var Mn                 = require('marionette')
     , Radio              = require('backbone.radio')
+    , Tile               = require('../../base/tile_class')
     , TileMoverBehavior  = require('./behaviors/tile_mover_behavior');
 
   return Mn.ItemView.extend({
@@ -30,7 +31,9 @@ define(function(require) {
     },
 
     events: {
-      'drop': 'onTileDrop'
+      'dragover'  : 'preventDefaultEvent',
+      'dragenter' : 'preventDefaultEvent',
+      'drop'      : 'onTileDrop'
     },
 
     initialize: function(options) {
@@ -44,7 +47,11 @@ define(function(require) {
       this.numWidthTiles  = this.width;
       this.height *= 64;
       this.width *= 64;
+    },
 
+    preventDefaultEvent: function(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
     },
 
     addListeners: function() {
@@ -91,23 +98,14 @@ define(function(require) {
       }
     },
 
-    addNewTile: function($tileImage) {
-      this.ui.tiles.append($tileImage);
-      this.triggerMethod('initializeTile', $tileImage);
-    },
-
     onTileDrop: function(evt) {
       evt.preventDefault();
       evt.stopPropagation();
-      var tileType = this.ui.tilePicker.val()
-        , size     = tileType.split('_')[2].split('x')
-        , $tileImg = $('<img>').addClass('tile').attr('src', './img/' + tileType + '.jpg');
+      if (!evt.target.id || evt.target.id !== 'tiles') return false;
 
-      $tileImg.css({
-        'height' : size[0] * 64,
-        'width' : size[1] * 64
-      });
-      Radio.request('mapView', 'addNewTile', $tileImg);
+      var tile = new Tile(evt);
+
+      this.ui.tiles.append(tile.$el);
     },
 
     rotateClockwise: function() {

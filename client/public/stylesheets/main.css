@@ -14,6 +14,32 @@ body {
   -webkit-perspective: 500;
   perspective: 500; }
 
+.btn {
+  display: inline-block;
+  word-spacing: normal;
+  letter-spacing: normal;
+  cursor: pointer;
+  padding: 8px 5px;
+  height: 24px;
+  width: 40px;
+  font-size: 0.6rem;
+  text-align: center;
+  background-color: #ccc; }
+  @media (min-width: 1025px) {
+    .btn {
+      width: 141px; } }
+  .btn span {
+    padding-top: 8px;
+    display: none; }
+    @media (min-width: 1025px) {
+      .btn span {
+        display: block; } }
+  .btn i {
+    display: inline; }
+    @media (min-width: 1025px) {
+      .btn i {
+        display: none; } }
+
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -57,28 +83,11 @@ html {
       float: left; }
     .toolbar-region .toolbar .right-toolbar-btns {
       float: right; }
-    .toolbar-region .toolbar button {
-      height: 40px;
-      width: 50px;
-      font-size: 0.6rem;
-      text-align: center;
+    .toolbar-region .toolbar .btn {
       float: left;
       margin-right: 15px; }
-      .toolbar-region .toolbar button:last-child {
+      .toolbar-region .toolbar .btn:last-child {
         margin-right: 0px; }
-      @media (min-width: 1025px) {
-        .toolbar-region .toolbar button {
-          width: 141px; } }
-      .toolbar-region .toolbar button span {
-        display: none; }
-        @media (min-width: 1025px) {
-          .toolbar-region .toolbar button span {
-            display: block; } }
-      .toolbar-region .toolbar button i {
-        display: inline; }
-        @media (min-width: 1025px) {
-          .toolbar-region .toolbar button i {
-            display: none; } }
 
 .mapGrid {
   position: relative;

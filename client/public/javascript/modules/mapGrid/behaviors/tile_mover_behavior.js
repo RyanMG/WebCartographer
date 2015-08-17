@@ -2,8 +2,7 @@ define(function(require) {
 
   var Mn       = require('marionette')
     , _        = require('underscore')
-    , DragDrop = require('../../../utilities/drag-drop')
-    , touchCoordinateVariable = navigator.userAgent.match(/OS [1-4](?:_\d+)+ like Mac/) ? "page" : "client";
+    , DragDrop = require('../../../utilities/drag-drop');
 
   return Marionette.Behavior.extend({
 
@@ -32,50 +31,6 @@ define(function(require) {
       this.$currentElement = null;
     },
 
-    onRotateClockwise: function() {
-      if (!this.$currentElement) {
-        return;
-      }
-
-      this.$currentElement.removeClass('rotate-' + this.currentRotation);
-      this.currentRotation += 90;
-      this.$currentElement.addClass('rotate-' + this.currentRotation);
-      if (this.currentRotation === 360) {
-        _.delay(function(ctx) {
-          ctx.$currentElement.removeClass('animated rotate-360');
-          ctx.$currentElement.addClass('rotate-0');
-          ctx.currentRotation = 0;
-
-          _.delay(function(ctx) {
-            ctx.$currentElement.addClass('animated');
-          }, 10, ctx);
-
-        }, 400, this);
-      }
-    },
-
-    onRotateCounterClockwise: function() {
-      if (!this.$currentElement) {
-        return;
-      }
-
-      this.$currentElement.removeClass('rotate-' + this.currentRotation);
-      this.currentRotation -= 90;
-      this.$currentElement.addClass('rotate-' + this.currentRotation);
-      if (this.currentRotation === -90) {
-        _.delay(function(ctx) {
-          ctx.$currentElement.removeClass('animated rotate--90');
-          ctx.$currentElement.addClass('rotate-270');
-          ctx.currentRotation = 270;
-
-          _.delay(function(ctx) {
-            ctx.$currentElement.addClass('animated');
-          }, 10, ctx);
-
-        }, 400, this);
-      }
-    },
-
     onTouchStart: function(evt) {
       if (el.draggable === true) {
         evt.preventDefault();
@@ -84,7 +39,7 @@ define(function(require) {
     },
 
     onDragStart: function(evt) {
-      // new DragDrop(evt, evt.target, false);
+      new DragDrop(evt, evt.target, false);
     }
 
   });

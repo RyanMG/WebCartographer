@@ -16,6 +16,10 @@ define(function(require) {
       dialog: "#app-dialog-region"
     },
 
+    events: {
+      'touchmove': 'onTouchMove'
+    },
+
     initialize: function () {
       Radio.reply('rootView', 'show:mainView', this.showMainView, this);
     },
@@ -32,6 +36,12 @@ define(function(require) {
         width: 10,
         bg_texture: 'wood'
       }) );
+    },
+
+    // Prevent overflow on iOS when dragging tiles
+    onTouchMove: function(evt) {
+      evt.preventDefault();
+      // evt.stopPropagation();
     }
   });
 
