@@ -84,7 +84,7 @@ define(function(require) {
     },
 
     onDragStart: function(evt) {
-      new DragDrop(evt, evt.target, false);
+      // new DragDrop(evt, evt.target, false);
     }
 
   });

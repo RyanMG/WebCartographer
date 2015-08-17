@@ -1,13 +1,13 @@
 define(function(require) {
 
-  function DragDrop(event, el, isTouch) {
+  function DragDrop(evt, el, isTouch) {
 
     this.dragData = {};
     this.dragDataTypes = [];
     this.dragImage = null;
     this.dragImageTransform = null;
     this.dragImageWebKitTransform = null;
-    this.el = el || event.target;
+    this.el = el || evt.target;
     this.isTouch = isTouch || false;
     this.moveHandler, this.endHandler, this.canceHandler;
 
@@ -17,7 +17,7 @@ define(function(require) {
       this.translateDragImage(-9999, -9999);
 
     } else {
-      this.setupDragImage(event, el);
+      this.setupDragImage(evt, el);
     }
 
     this.listen();
@@ -36,8 +36,11 @@ define(function(require) {
         this.end = _onEvt(document, "dragend", this.cleanup, this);
       }
 
-      function ontouchend(event) {
-        this.dragend(event, event.target);
+      _onEvt(document, "dragover", this.preventDefaultEvent, this);
+      _onEvt(document, "dragenter", this.preventDefaultEvent, this);
+
+      function ontouchend(evt) {
+        this.dragend(evt, evt.target);
         this.cleanup();
       }
     },
@@ -58,9 +61,14 @@ define(function(require) {
       });
     },
 
-    move: function(event) {
+    preventDefaultEvent: function(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+    },
+
+    move: function(evt) {
       var pageXs = [], pageYs = [];
-      [].forEach.call(event.changedTouches, function(touch, index) {
+      [].forEach.call(evt.changedTouches, function(touch, index) {
         pageXs.push(touch.pageX);
         pageYs.push(touch.pageY);
       });
@@ -99,14 +107,14 @@ define(function(require) {
       }
     },
 
-    dragend: function(event) {
+    dragend: function(evt) {
 
       this.hideDragImage();
-      var target = elementFromTouchEvent(this.el,event)
+      var target = elementFromTouchEvent(this.el, evt)
       this.showDragImage();
 
       if (target) {
-        this.dispatchDrop(target, event)
+        this.dispatchDrop(target, evt)
       }
 
       var dragendEvt = doc.createEvent("Event");
@@ -114,11 +122,11 @@ define(function(require) {
       this.el.dispatchEvent(dragendEvt);
     },
 
-    dispatchDrop: function(target, event) {
+    dispatchDrop: function(target, evt) {
       var dropEvt = doc.createEvent("Event");
       dropEvt.initEvent("drop", true, true);
 
-      var touch = event.changedTouches[0];
+      var touch = evt.changedTouches[0];
       var x = touch[coordinateSystemForElementFromPoint + 'X'];
       var y = touch[coordinateSystemForElementFromPoint + 'Y'];
       dropEvt.offsetX = x - target.x;
@@ -218,23 +226,23 @@ define(function(require) {
     }
   }
 
-  function _onEvt(el, event, handler, context) {
+  function _onEvt(el, evt, handler, context) {
     if(context) handler = handler.bind(context)
-    el.addEventListener(event, handler);
+    el.addEventListener(evt, handler);
     return {
       off: function() {
-        return el.removeEventListener(event, handler);
+        return el.removeEventListener(evt, handler);
       }
     };
   }
 
-  function _once(el, event, handler, context) {
+  function _once(el, evt, handler, context) {
     if(context) handler = handler.bind(context)
     function listener(evt) {
       handler(evt);
-      return el.removeEventListener(event,listener);
+      return el.removeEventListener(evt, listener);
     }
-    return el.addEventListener(event,listener);
+    return el.addEventListener(evt, listener);
   }
 
   return DragDrop;

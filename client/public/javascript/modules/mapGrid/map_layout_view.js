@@ -29,7 +29,9 @@ define(function(require) {
       tiles    : '#tiles'
     },
 
-    events: {},
+    events: {
+      'drop': 'onTileDrop'
+    },
 
     initialize: function(options) {
       Mn.mergeOptions(this, options, this.mergeOptions);
@@ -92,6 +94,20 @@ define(function(require) {
     addNewTile: function($tileImage) {
       this.ui.tiles.append($tileImage);
       this.triggerMethod('initializeTile', $tileImage);
+    },
+
+    onTileDrop: function(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      var tileType = this.ui.tilePicker.val()
+        , size     = tileType.split('_')[2].split('x')
+        , $tileImg = $('<img>').addClass('tile').attr('src', './img/' + tileType + '.jpg');
+
+      $tileImg.css({
+        'height' : size[0] * 64,
+        'width' : size[1] * 64
+      });
+      Radio.request('mapView', 'addNewTile', $tileImg);
     },
 
     rotateClockwise: function() {

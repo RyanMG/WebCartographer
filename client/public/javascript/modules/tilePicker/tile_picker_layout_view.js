@@ -22,7 +22,11 @@ define(function(require) {
 
     events: {
       'dragstart @ui.icon': 'onDragStart',
-      'dragend @ui.icon': 'onDragEnd'
+      'dragend @ui.icon'  : 'onDragEnd'
+    },
+
+    preventDefaultAction: function(evt) {
+      evt.preventDefault();
     },
 
     initialize: function() {
@@ -45,17 +49,6 @@ define(function(require) {
     onDragEnd: function(evt) {
       this.toggleOpen(true);
     }
-
-      // var tileType = this.ui.tilePicker.val()
-      //   , size     = tileType.split('_')[2].split('x')
-      //   , $tileImg = $('<img>').addClass('tile').attr('src', './img/' + tileType + '.jpg');
-
-      // $tileImg.css({
-      //   'height' : size[0] * 64,
-      //   'width' : size[1] * 64
-      // });
-      // Radio.request('mapView', 'addNewTile', $tileImg);
-
   });
 
 });
