@@ -1,5 +1,7 @@
 define(function(require) {
 
+  var touchCoordinateVariable = navigator.userAgent.match(/OS [1-4](?:_\d+)+ like Mac/) ? "page" : "client";
+
   function DragDrop(evt, el, isTouch) {
 
     this.dragData = {};
@@ -73,8 +75,8 @@ define(function(require) {
         pageYs.push(touch.pageY);
       });
 
-      var x = average(pageXs) - (parseInt(this.dragImage.offsetWidth, 10) / 2);
-      var y = average(pageYs) - (parseInt(this.dragImage.offsetHeight, 10) / 2);
+      var x = _average(pageXs) - (parseInt(this.dragImage.offsetWidth, 10) / 2);
+      var y = _average(pageYs) - (parseInt(this.dragImage.offsetHeight, 10) / 2);
       this.translateDragImage(x, y);
     },
 
@@ -110,25 +112,25 @@ define(function(require) {
     dragend: function(evt) {
 
       this.hideDragImage();
-      var target = elementFromTouchEvent(this.el, evt)
+      var target = _elementFromTouchEvent(this.el, evt)
       this.showDragImage();
 
       if (target) {
         this.dispatchDrop(target, evt)
       }
 
-      var dragendEvt = doc.createEvent("Event");
+      var dragendEvt = document.createEvent("Event");
       dragendEvt.initEvent("dragend", true, true);
       this.el.dispatchEvent(dragendEvt);
     },
 
     dispatchDrop: function(target, evt) {
-      var dropEvt = doc.createEvent("Event");
+      var dropEvt = document.createEvent("Event");
       dropEvt.initEvent("drop", true, true);
 
       var touch = evt.changedTouches[0];
-      var x = touch[coordinateSystemForElementFromPoint + 'X'];
-      var y = touch[coordinateSystemForElementFromPoint + 'Y'];
+      var x = touch[touchCoordinateVariable + 'X'];
+      var y = touch[touchCoordinateVariable + 'Y'];
       dropEvt.offsetX = x - target.x;
       dropEvt.offsetY = y - target.y;
 
@@ -142,15 +144,11 @@ define(function(require) {
          // https://www.w3.org/Bugs/Public/show_bug.cgi?id=14638 - if we don't cancel it, we'll snap back
       }.bind(this);
 
-      once(doc, "drop", function() {
-        log("drop event not canceled");
-      },this);
-
       target.dispatchEvent(dropEvt);
     },
 
     dispatchDragStart: function() {
-      var evt = doc.createEvent("Event");
+      var evt = document.createEvent("Event");
       evt.initEvent("dragstart", true, true);
       evt.dataTransfer = {
         setData: function(type, val) {
@@ -226,6 +224,15 @@ define(function(require) {
     }
   }
 
+  function _elementFromTouchEvent(el,event) {
+    var touch = event.changedTouches[0];
+    var target = document.elementFromPoint(
+      touch[touchCoordinateVariable + "X"],
+      touch[touchCoordinateVariable + "Y"]
+    );
+    return target
+  }
+
   function _onEvt(el, evt, handler, context) {
     if(context) handler = handler.bind(context)
     el.addEventListener(evt, handler);
@@ -236,13 +243,11 @@ define(function(require) {
     };
   }
 
-  function _once(el, evt, handler, context) {
-    if(context) handler = handler.bind(context)
-    function listener(evt) {
-      handler(evt);
-      return el.removeEventListener(evt, listener);
-    }
-    return el.addEventListener(evt, listener);
+  function _average(arr) {
+    if (arr.length === 0) return 0;
+    return arr.reduce((function(s, v) {
+      return v + s;
+    }), 0) / arr.length;
   }
 
   return DragDrop;

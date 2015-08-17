@@ -21,6 +21,7 @@ define(function(require) {
     },
 
     events: {
+      'touchstart @ui.icon': 'onTouchStart',
       'dragstart @ui.icon': 'onDragStart',
       'dragend @ui.icon'  : 'onDragEnd'
     },
@@ -43,6 +44,11 @@ define(function(require) {
 
     onDragStart: function(evt) {
       new DragDrop(evt, evt.target, false);
+      this.toggleOpen(false);
+    },
+
+    onTouchStart: function(evt) {
+      new DragDrop(evt, evt.target, true);
       this.toggleOpen(false);
     },
 
