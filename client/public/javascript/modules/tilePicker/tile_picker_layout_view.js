@@ -38,8 +38,13 @@ define(function(require) {
     }, 550, {trailing: false}),
 
     onDragStart: function(evt) {
+      var xPos    = evt.originalEvent.offsetX
+        , yPos    = evt.originalEvent.offsetY
+        , imgSrc  = evt.target.src
+        , textObj = JSON.stringify( { x: xPos, y: yPos, src: imgSrc } );
+
+      evt.originalEvent.dataTransfer.setData( 'text', textObj );
       this.toggleOpen(false);
-      evt.originalEvent.dataTransfer.setData( 'text', evt.target.src );
     },
 
     onTouchStart: function(evt) {

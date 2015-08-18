@@ -2,7 +2,7 @@ define(function(require) {
 
   var Mn                 = require('marionette')
     , Radio              = require('backbone.radio')
-    , Tile               = require('../../base/tile_class')
+    , TileCollection     = require('./entities/tile_entity')
     , TileMoverBehavior  = require('./behaviors/tile_mover_behavior');
 
   return Mn.ItemView.extend({
@@ -27,16 +27,19 @@ define(function(require) {
       wrapper  : '#map-wrapper',
       backdrop : '#map-backdrop',
       grid     : '#grid',
-      tiles    : '#tiles'
+      tiles    : '#tiles',
+      tile     : '.tile'
     },
 
     events: {
-      'dragover'  : 'preventDefaultEvent',
-      'dragenter' : 'preventDefaultEvent',
-      'drop'      : 'onTileDrop'
+      'dragover'     : 'preventDefaultEvent',
+      'dragenter'    : 'preventDefaultEvent',
+      'drop'         : 'onTileDrop',
+      'tap @ui.tile' : 'onTileTap'
     },
 
     initialize: function(options) {
+      this.collection = new TileCollection();
       Mn.mergeOptions(this, options, this.mergeOptions);
       this.setupMapVariables();
       this.addListeners();
@@ -103,9 +106,20 @@ define(function(require) {
       evt.stopPropagation();
       if (!evt.target.id || evt.target.id !== 'tiles') return false;
 
-      var tile = new Tile(evt);
+      var tileData = JSON.parse( evt.originalEvent.dataTransfer.getData( 'text' ) )
+        , newTile;
 
-      this.ui.tiles.append(tile.$el);
+      dropData = {
+        mapX : evt.originalEvent.offsetX || 0,
+        mapY : evt.originalEvent.offsetY || 0
+      };
+
+      newTile  = this.collection.add(tileData, dropData);
+      this.ui.tiles.append(newTile.$el);
+    },
+
+    onTileTap: function(evt) {
+      // this.
     },
 
     rotateClockwise: function() {
