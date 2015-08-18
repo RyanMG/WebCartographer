@@ -38,11 +38,14 @@ define(function(require) {
         currentY : Math.round(posY / 32) * 32
       });
 
+      this.id = _.uniqueId('tile-');
+
       this.$el = _buildElement(modelData.src);
       this.$el.css({
         left: this.get('currentX'),
         top: this.get('currentY')
       });
+      this.$el.data('tile-id', this.id );
     },
 
     rotateClockwise: function() {

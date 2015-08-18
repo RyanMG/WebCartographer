@@ -119,7 +119,7 @@ define(function(require) {
     },
 
     onTileTap: function(evt) {
-      // this.
+      debugger;
     },
 
     rotateClockwise: function() {
