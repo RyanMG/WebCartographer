@@ -26,9 +26,9 @@ define(function(require) {
     },
 
     onClearCurrentElement: function() {
-      this.$currentElement.off("touchstart");
-      this.$currentElement.off("dragstart");
-      this.$currentElement = null;
+      // this.$currentElement.off("touchstart");
+      // this.$currentElement.off("dragstart");
+      // this.$currentElement = null;
     },
 
     onTouchStart: function(evt) {

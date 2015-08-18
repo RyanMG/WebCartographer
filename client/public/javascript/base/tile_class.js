@@ -1,14 +1,27 @@
 define(function(require) {
 
   function Tile(evt) {
-    var tileSrc = evt.originalEvent.dataTransfer.getData( 'text' )
-      , posX = evt.originalEvent.offsetX || 0
-      , posY = evt.originalEvent.offsetY || 0;
+    var tileSrc  = evt.originalEvent.dataTransfer.getData( 'text' )
+      , posX     = evt.originalEvent.offsetX || 0
+      , posY     = evt.originalEvent.offsetY || 0
+      , tilename = _.last( tileSrc.split('/') ).split('.')[0]
+      , parts    = tilename.split('_')
+      , size     = parts[2].split('x');
 
+    this.name     = tilename
+    this.texture  = parts[0]
+    this.feature  = parts[1]
+    this.width    = size[0]
+    this.height   = size[1]
     this.rotation = 0;
-    this.currentX = posX;
-    this.currentY = posY;
+
+    this.currentX = Math.round(posX / 32) * 32;
+    this.currentY = Math.round(posY / 32) * 32;
     this.$el = _buildElement(tileSrc);
+    this.$el.css({
+      left: this.currentX,
+      top: this.currentY
+    });
   }
 
   Tile.prototype = {

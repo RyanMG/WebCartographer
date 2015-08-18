@@ -45,8 +45,8 @@ define(function(require) {
     setupMapVariables: function() {
       this.numHeightTiles = this.height;
       this.numWidthTiles  = this.width;
-      this.height *= 64;
-      this.width *= 64;
+      this.height *= 32;
+      this.width *= 32;
     },
 
     preventDefaultEvent: function(evt) {
@@ -90,11 +90,11 @@ define(function(require) {
       });
 
       for (var i = 1; i < this.numHeightTiles; i++) {
-        $('<div class="grid-line grid-line-v">').css({ left: i * 64 }).appendTo(this.ui.grid);
+        $('<div class="grid-line grid-line-v">').css({ left: i * 32 }).appendTo(this.ui.grid);
       }
 
       for (var i = 1; i < this.numWidthTiles; i++) {
-        $('<div class="grid-line grid-line-h">').css({ top: i * 64 }).appendTo(this.ui.grid);
+        $('<div class="grid-line grid-line-h">').css({ top: i * 32 }).appendTo(this.ui.grid);
       }
     },
 
