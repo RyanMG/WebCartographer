@@ -25,9 +25,9 @@ body {
   color: $gray5;
 
   &.disabled {
-  	background-color: $button-disabled;
-  	color: $gray4;
-  	cursor: not-allowed;
+    background-color: $button-disabled;
+    color: $gray4;
+    cursor: not-allowed;
   }
 
   @include media-desktop-only {
@@ -35,7 +35,7 @@ body {
   }
 
   span {
-  	padding-top: 8px;
+    padding-top: 8px;
     display: none;
 
     @include media-desktop-only {
@@ -50,4 +50,25 @@ body {
       display: none;
     }
   }
+}
+
+label {
+  display: block;
+  border-bottom: 1px solid $gray4;
+  color: $gray5;
+  font-size: 0.8rem;
+  padding-bottom: 1px;
+  margin-bottom: 8px;
+}
+
+input,
+select {
+  width: 100%;
+}
+
+h2 {
+	display: block;
+	margin: 0 0 20px 0;
+	padding-bottom: 2px;
+	border-bottom: 2px solid $gray4;
 }

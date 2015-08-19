@@ -13,7 +13,8 @@ define(function(require) {
       toolbar: "#app-toolbar-region",
       map: "#app-map-region",
       tilePicker: "#app-tile-picker-region",
-      dialog: "#app-dialog-region"
+      dialog: "#app-dialog-region",
+      settings: "#app-settings-region"
     },
 
     events: {
@@ -29,7 +30,8 @@ define(function(require) {
       var ToolbarView    = require('modules/toolbar/toolbar_item_view')
         , MapView        = require('modules/mapGrid/map_composite_view')
         , TileCollection = require('modules/mapGrid/entities/tile_entity')
-        , TilePickerView = require('modules/tilePicker/tile_picker_item_view');
+        , TilePickerView = require('modules/tilePicker/tile_picker_item_view')
+        , SettingsView   = require('modules/settings/settings_item_view');
 
       this.getRegion('toolbar').show( new ToolbarView() );
       this.getRegion('tilePicker').show( new TilePickerView() );
@@ -39,6 +41,7 @@ define(function(require) {
         width: 10,
         bg_texture: 'wood'
       }) );
+      this.getRegion('settings').show( new SettingsView() );
     },
 
     // Prevent overflow on iOS when dragging tiles

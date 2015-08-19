@@ -14,12 +14,6 @@ define(function(require) {
 
     template: "#map_layout",
 
-    // behaviors: {
-    //   'TileMoverBehavior': {
-    //     behaviorClass: TileMoverBehavior
-    //   }
-    // },
-
     childView : TileItemView,
 
     childViewContainer: '@ui.tiles',
@@ -55,6 +49,7 @@ define(function(require) {
       this.numWidthTiles  = this.width;
       this.height *= 32;
       this.width *= 32;
+      this.gridOpacity = 0.8;
       this.selectedChild = null;
     },
 
@@ -68,6 +63,7 @@ define(function(require) {
       Radio.reply('mapView', 'rotateCounterClockwise', this.rotateCounterClockwise, this);
       Radio.reply('mapView', 'addNewTile', this.addNewTile, this);
       Radio.reply('mapView', 'clearMap', this.clearMap, this);
+      Radio.reply('mapView', 'updateGridOpacity', this.updateGridOpacity, this);
     },
 
     onRender: function() {
@@ -94,8 +90,9 @@ define(function(require) {
 
     addGrid: function() {
       this.ui.grid.css({
-        'height': this.height,
-        'width': this.width
+        'height'  : this.height,
+        'width'   : this.width,
+        'opacity' : this.gridOpacity
       });
 
       for (var i = 1; i < this.numHeightTiles; i++) {
@@ -105,6 +102,12 @@ define(function(require) {
       for (var i = 1; i < this.numWidthTiles; i++) {
         $('<div class="grid-line grid-line-h">').css({ top: i * 32 }).appendTo(this.ui.grid);
       }
+    },
+
+    updateGridOpacity: function(newOpacity) {
+      this.ui.grid.css({
+        'opacity': newOpacity
+      })
     },
 
     onTileDrop: function(evt) {

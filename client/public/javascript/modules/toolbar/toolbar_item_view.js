@@ -15,18 +15,20 @@ define(function(require) {
     className: 'toolbar',
 
     ui: {
-      rotateClockwiseBtn: '#rotate-clockwise',
-      rotateCounterBtn: '#rotate-counter-clockwise',
-      newTileBtn: '#new-tile',
-      clearMapBtn: '#clear-tiles',
-      tileActionBtns: '.js-tile-action'
+      rotateClockwiseBtn : '#rotate-clockwise',
+      rotateCounterBtn   : '#rotate-counter-clockwise',
+      newTileBtn         : '#new-tile',
+      clearMapBtn        : '#clear-tiles',
+      tileActionBtns     : '.js-tile-action',
+      userSettingsBtn    : '#user-settings'
     },
 
     events: {
-      "click @ui.rotateClockwiseBtn": "onRotateClockwiseClick",
-      "click @ui.rotateCounterBtn": "onRotateCounterBtnClick",
-      "click @ui.newTileBtn": "onNewTileBtnClick",
-      "click @ui.clearMapBtn": "onClearTilesBtnClick"
+      'click @ui.rotateClockwiseBtn' : 'onRotateClockwiseClick',
+      'click @ui.rotateCounterBtn'   : 'onRotateCounterBtnClick',
+      'click @ui.newTileBtn'         : 'onNewTileBtnClick',
+      'click @ui.clearMapBtn'        : 'onClearTilesBtnClick',
+      'click @ui.userSettingsBtn'    : 'onSettingsBtnClick'
     },
 
     initialize: function(options) {
@@ -56,6 +58,10 @@ define(function(require) {
 
     onNewTileBtnClick: function() {
       Radio.request('tilePickerView', 'toggleOpen');
+    },
+
+    onSettingsBtnClick: function() {
+      Radio.request('settingsView', 'toggleSettingsOpen');
     },
 
     onClearTilesBtnClick: function() {

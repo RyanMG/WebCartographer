@@ -21,7 +21,9 @@ html(lang="en-US")
       include templates/map_layout
     script#tile_picker_layout(type="text/x-handlebars-template")
       include templates/tile_picker_layout
-    script#dialog_template(type="text/x-handlebars-template")
-      include templates/dialog_template
+    script#settings_layout(type="text/x-handlebars-template")
+      include templates/settings_layout
+    //- script#dialog_template(type="text/x-handlebars-template")
+    //-   include templates/dialog_template
 
     script(data-main="./javascript/main.js", src="./vendor/requirejs/require.js")
