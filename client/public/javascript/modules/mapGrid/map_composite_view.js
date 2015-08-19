@@ -2,24 +2,27 @@ define(function(require) {
 
   var Mn                 = require('marionette')
     , Radio              = require('backbone.radio')
-    , TileCollection     = require('./entities/tile_entity')
-    , TileMoverBehavior  = require('./behaviors/tile_mover_behavior');
+    , TileItemView       = require('./tile_item_view');
 
-  return Mn.ItemView.extend({
+  return Mn.CompositeView.extend({
 
     attributes: {
-      'data-view-name' : 'map_layout_view',
+      'data-view-name' : 'map_composite_view',
     },
 
     className: "mapGrid",
 
     template: "#map_layout",
 
-    behaviors: {
-      'TileMoverBehavior': {
-        behaviorClass: TileMoverBehavior
-      }
-    },
+    // behaviors: {
+    //   'TileMoverBehavior': {
+    //     behaviorClass: TileMoverBehavior
+    //   }
+    // },
+
+    childView : TileItemView,
+
+    childViewContainer: '@ui.tiles',
 
     mergeOptions: ['height', 'width', 'bg_texture'],
 
@@ -27,19 +30,16 @@ define(function(require) {
       wrapper  : '#map-wrapper',
       backdrop : '#map-backdrop',
       grid     : '#grid',
-      tiles    : '#tiles',
-      tile     : '.tile'
+      tiles    : '#tiles'
     },
 
     events: {
       'dragover'     : 'preventDefaultEvent',
       'dragenter'    : 'preventDefaultEvent',
-      'drop'         : 'onTileDrop',
-      'tap @ui.tile' : 'onTileTap'
+      'drop'         : 'onTileDrop'
     },
 
     initialize: function(options) {
-      this.collection = new TileCollection();
       Mn.mergeOptions(this, options, this.mergeOptions);
       this.setupMapVariables();
       this.addListeners();
@@ -114,12 +114,7 @@ define(function(require) {
         mapY : evt.originalEvent.offsetY || 0
       };
 
-      newTile  = this.collection.add(tileData, dropData);
-      this.ui.tiles.append(newTile.$el);
-    },
-
-    onTileTap: function(evt) {
-      debugger;
+      newTile = this.collection.add(tileData, dropData);
     },
 
     rotateClockwise: function() {
