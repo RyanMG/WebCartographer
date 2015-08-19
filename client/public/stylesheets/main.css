@@ -89,12 +89,24 @@ html {
   user-select: none; }
   .toolbar-region .toolbar {
     padding: 5px 10px; }
-    .toolbar-region .toolbar .left-toolbar-btns {
-      float: left; }
-    .toolbar-region .toolbar .right-toolbar-btns {
-      float: right; }
+    .toolbar-region .toolbar .toolbar-btns {
+      display: inline-block;
+      width: 33.33%; }
+      .toolbar-region .toolbar .toolbar-btns.left-btns {
+        text-align: left; }
+      .toolbar-region .toolbar .toolbar-btns.center-btns {
+        text-align: center; }
+      .toolbar-region .toolbar .toolbar-btns.right-btns {
+        text-align: right; }
+      @media (max-width: 500px) {
+        .toolbar-region .toolbar .toolbar-btns.left-btns {
+          width: 39%; }
+        .toolbar-region .toolbar .toolbar-btns.center-btns {
+          width: 39%; }
+        .toolbar-region .toolbar .toolbar-btns.right-btns {
+          width: 22%; } }
     .toolbar-region .toolbar .btn {
-      float: left;
+      display: inline-block;
       margin-right: 15px; }
       .toolbar-region .toolbar .btn:last-child {
         margin-right: 0px; }

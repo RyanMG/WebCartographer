@@ -1,7 +1,8 @@
 define(function(require) {
 
   var Mn    = require('marionette')
-    , Radio = require('backbone.radio');
+    , Radio = require('backbone.radio')
+    , rAF   = require('../../utilities/request-animation-frame');
 
   return Mn.ItemView.extend({
 
@@ -56,6 +57,10 @@ define(function(require) {
 
     deselectTile: function() {
       this.$el.removeClass('selected animated').attr('draggable', false);
+    },
+
+    requestPositionUpdate: function() {
+      rAF(updatePosition);
     },
 
     updatePosition: function() {

@@ -11,7 +11,7 @@ module.exports = function(grunt) {
         dest: 'public/',
         ext: '.html',
         options: {
-          pretty: true
+          pretty: false
         }
       }
     },

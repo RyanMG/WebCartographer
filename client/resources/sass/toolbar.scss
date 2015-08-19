@@ -7,15 +7,39 @@
   .toolbar {
     padding: 5px 10px;
 
-    .left-toolbar-btns {
-      float: left;
-    }
-    .right-toolbar-btns {
-      float: right;
+    .toolbar-btns {
+      display: inline-block;
+      width: 33.33%;
+
+      &.left-btns {
+        text-align: left;
+      }
+
+      &.center-btns {
+        text-align: center;
+      }
+
+      &.right-btns {
+        text-align: right;
+      }
+
+      @include media-mobile-only {
+        &.left-btns {
+          width: 39%;
+        }
+
+        &.center-btns {
+          width: 39%;
+        }
+
+        &.right-btns {
+          width: 22%;
+        }
+      }
     }
 
     .btn {
-      float: left;
+      display: inline-block;
       margin-right: 15px;
 
       &:last-child {

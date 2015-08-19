@@ -12,7 +12,7 @@ define(function(require) {
       'data-view-name' : 'toolbar_layout_view',
     },
 
-    className: 'toolbar-region',
+    className: 'toolbar',
 
     ui: {
       rotateClockwiseBtn: '#rotate-clockwise',
