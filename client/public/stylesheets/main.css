@@ -234,7 +234,7 @@ html {
     width: 100%;
     height: 80px; }
   .settings .opacity-text {
-    padding-left: 231px; }
+    color: #999; }
 
 .dialog {
   height: 200px;

@@ -30,6 +30,10 @@ define(function(require) {
       this.addListeners();
     },
 
+    onRender: function() {
+      this.onOpacityChange();
+    },
+
     addListeners: function() {
       Radio.reply('settingsView', 'toggleSettingsOpen', this.toggleSettingsOpen, this);
     },
