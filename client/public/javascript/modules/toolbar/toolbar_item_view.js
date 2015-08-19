@@ -48,13 +48,13 @@ define(function(require) {
       this.ui.tileActionBtns.addClass('disabled');
     },
 
-    onRotateClockwiseClick: _.throttle(function() {
+    onRotateClockwiseClick: function() {
       Radio.request('mapView', 'rotateClockwise');
-    }, 600, {trailing: false}),
+    },
 
-    onRotateCounterBtnClick: _.throttle(function() {
+    onRotateCounterBtnClick: function() {
       Radio.request('mapView', 'rotateCounterClockwise');
-    }, 600, {trailing: false}),
+    },
 
     onNewTileBtnClick: function() {
       Radio.request('tilePickerView', 'toggleOpen');

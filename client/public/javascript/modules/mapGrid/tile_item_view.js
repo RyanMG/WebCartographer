@@ -29,17 +29,16 @@ define(function(require) {
     },
 
     modelEvents: {
-      'change:currentX change:currentX change:rotation' : 'updatePosition'
+      'change:currentX change:currentX change:rotation' : 'requestPositionUpdate'
     },
 
     initialize: function(options) {
       Mn.mergeOptions(this, options, this.mergeOptions);
       this.id = this.model.id;
+      this.animating = false;
     },
 
-    addListeners: function() {
-      Radio.reply('tileView', 'doThing', this.doThing, this);
-    },
+    addListeners: function() {},
 
     onBeforeRender: function() {
       this.updatePosition();
@@ -60,7 +59,10 @@ define(function(require) {
     },
 
     requestPositionUpdate: function() {
-      rAF(updatePosition);
+      if (!this.animating) {
+        rAF( this.updatePosition.bind(this) );
+        this.animating = true;
+      }
     },
 
     updatePosition: function() {
@@ -76,6 +78,7 @@ define(function(require) {
       this.el.style.webkitTransform = value;
       this.el.style.mozTransform = value;
       this.el.style.transform = value;
+      this.animating = false;
     },
 
     rotateClockwise: function() {
