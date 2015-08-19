@@ -1,7 +1,8 @@
 .toolbar-region {
   height: $toolbar-height;
   width: 100%;
-  background: #999;
+  background: $gray4;
+  @include user-select(none);
 
   .toolbar {
     padding: 5px 10px;

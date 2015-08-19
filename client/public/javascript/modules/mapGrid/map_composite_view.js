@@ -34,9 +34,14 @@ define(function(require) {
     },
 
     events: {
-      'dragover'     : 'preventDefaultEvent',
-      'dragenter'    : 'preventDefaultEvent',
-      'drop'         : 'onTileDrop'
+      'dragover'  : 'preventDefaultEvent',
+      'dragenter' : 'preventDefaultEvent',
+      'drop'      : 'onTileDrop',
+      'click'     : 'onMapClick'
+    },
+
+    childEvents: {
+      'child:selected' : 'swapSelectedChild'
     },
 
     initialize: function(options) {
@@ -50,6 +55,7 @@ define(function(require) {
       this.numWidthTiles  = this.width;
       this.height *= 32;
       this.width *= 32;
+      this.selectedChild = null;
     },
 
     preventDefaultEvent: function(evt) {
@@ -117,17 +123,37 @@ define(function(require) {
       newTile = this.collection.add(tileData, dropData);
     },
 
-    rotateClockwise: function() {
-      this.triggerMethod('rotateClockwise')
+    onMapClick: function(evt) {
+      // TODO: Deselect when no tile is clicked
+      // Radio.request('toolbarView', 'tileDeselected');
     },
 
-    rotateCounterClockwise: function() {
-      this.triggerMethod('rotateCounterClockwise')
+    swapSelectedChild: function(childView) {
+      if (this.selectedChild) {
+        this.selectedChild.deselect();
+      } else {
+        Radio.request('toolbarView', 'tileSelected');
+      }
+
+      this.selectedChild = childView;
     },
 
     clearMap: function() {
       this.triggerMethod('clearCurrentElement');
       this.ui.tiles.empty();
+      this.selectedChild = null;
+    },
+
+    rotateClockwise: function() {
+       if (this.selectedChild) {
+        this.selectedChild.rotateClockwise();
+      }
+    },
+
+    rotateCounterClockwise: function() {
+       if (this.selectedChild) {
+        this.selectedChild.rotateCounterClockwise();
+      }
     }
 
   });

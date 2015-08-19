@@ -1,7 +1,7 @@
 define(function(require) {
 
-  var Mn                 = require('marionette')
-    , Radio              = require('backbone.radio');
+  var Mn    = require('marionette')
+    , Radio = require('backbone.radio');
 
   return Mn.ItemView.extend({
 
@@ -24,10 +24,16 @@ define(function(require) {
     ui: {},
 
     events: {
+      'click': 'onClick'
+    },
+
+    modelEvents: {
+      'change:currentX change:currentX change:rotation' : 'updatePosition'
     },
 
     initialize: function(options) {
       Mn.mergeOptions(this, options, this.mergeOptions);
+      this.id = this.model.id;
     },
 
     addListeners: function() {
@@ -35,47 +41,46 @@ define(function(require) {
     },
 
     onBeforeRender: function() {
+      this.updatePosition();
+      this.selectTile();
+    },
 
-      this.$el.css({
-        top  : this.model.get('currentY'),
-        left : this.model.get('currentX')
-      })
+    onClick: function() {
+      this.selectTile();
+    },
+
+    selectTile: function() {
+      this.triggerMethod('child:selected');
+      this.$el.addClass('selected animated').attr('draggable', true);
+    },
+
+    deselectTile: function() {
+      this.$el.removeClass('selected animated').attr('draggable', false);
+    },
+
+    updatePosition: function() {
+      var xPos     = this.model.get('currentX')
+        , yPos     = this.model.get('currentY')
+        , rotation = this.model.get('rotation')
+        , value    = [
+            'translate(' + xPos + 'px, ' + yPos + 'px)',
+            'rotate(' + rotation + 'deg)'
+          ];
+
+      value = value.join(" ");
+      this.el.style.webkitTransform = value;
+      this.el.style.mozTransform = value;
+      this.el.style.transform = value;
     },
 
     rotateClockwise: function() {
-      this.$el.removeClass('rotate-' + this.rotation);
-      this.rotation += 90;
-      this.$el.addClass('rotate-' + this.rotation);
-      if (this.rotation === 360) {
-        _.delay(function(ctx) {
-          $element.removeClass('animated rotate-360');
-          $element.addClass('rotate-0');
-          ctx.rotation = 0;
-
-          _.delay(function(ctx) {
-            this.$el.addClass('animated');
-          }, 10, ctx);
-
-        }, 400, this);
-      }
+      var newRotation = this.model.get('rotation') + 90;
+      this.model.set('rotation', newRotation);
     },
 
     rotateCounterClockwise: function() {
-      this.$el.removeClass('rotate-' + this.rotation);
-      this.rotation -= 90;
-      this.$el.addClass('rotate-' + this.rotation);
-      if (this.rotation === -90) {
-        _.delay(function(ctx) {
-          this.$el.removeClass('animated rotate--90');
-          this.$el.addClass('rotate-270');
-          ctx.rotation = 270;
-
-          _.delay(function(ctx) {
-            this.$el.addClass('animated');
-          }, 10, ctx);
-
-        }, 400, this);
-      }
+      var newRotation = this.model.get('rotation') - 90;
+      this.model.set('rotation', newRotation);
     }
 
   });

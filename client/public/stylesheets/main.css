@@ -24,7 +24,12 @@ body {
   width: 40px;
   font-size: 0.6rem;
   text-align: center;
-  background-color: #ccc; }
+  background-color: #ccc;
+  color: #222; }
+  .btn.disabled {
+    background-color: #aaa;
+    color: #999;
+    cursor: not-allowed; }
   @media (min-width: 1025px) {
     .btn {
       width: 141px; } }
@@ -76,7 +81,12 @@ html {
 .toolbar-region {
   height: 50px;
   width: 100%;
-  background: #999; }
+  background: #999;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
   .toolbar-region .toolbar {
     padding: 5px 10px; }
     .toolbar-region .toolbar .left-toolbar-btns {
@@ -130,49 +140,12 @@ html {
       position: absolute;
       cursor: pointer; }
       .mapGrid #tiles .tile.selected {
-        opacity: 1.0;
-        border: 1px solid #fff; }
+        opacity: 1.0; }
       .mapGrid #tiles .tile.animated {
         -webkit-transition: all 0.3s;
         -moz-transition: all 0.3s;
         -o-transition: all 0.3s;
         transition: all 0.3s; }
-      .mapGrid #tiles .tile.rotate-0 {
-        -webkit-transform: rotate(0deg);
-        -moz-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        -o-transform: rotate(0deg);
-        transform: rotate(0deg); }
-      .mapGrid #tiles .tile.rotate-90 {
-        -webkit-transform: rotate(90deg);
-        -moz-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-        -o-transform: rotate(90deg);
-        transform: rotate(90deg); }
-      .mapGrid #tiles .tile.rotate-180 {
-        -webkit-transform: rotate(180deg);
-        -moz-transform: rotate(180deg);
-        -ms-transform: rotate(180deg);
-        -o-transform: rotate(180deg);
-        transform: rotate(180deg); }
-      .mapGrid #tiles .tile.rotate-270 {
-        -webkit-transform: rotate(270deg);
-        -moz-transform: rotate(270deg);
-        -ms-transform: rotate(270deg);
-        -o-transform: rotate(270deg);
-        transform: rotate(270deg); }
-      .mapGrid #tiles .tile.rotate-360 {
-        -webkit-transform: rotate(360deg);
-        -moz-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        -o-transform: rotate(360deg);
-        transform: rotate(360deg); }
-      .mapGrid #tiles .tile.rotate--90 {
-        -webkit-transform: rotate(-90deg);
-        -moz-transform: rotate(-90deg);
-        -ms-transform: rotate(-90deg);
-        -o-transform: rotate(-90deg);
-        transform: rotate(-90deg); }
 
 [draggable] {
   -webkit-user-select: none;
@@ -195,7 +168,12 @@ html {
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -o-transition: all 0.5s;
-  transition: all 0.5s; }
+  transition: all 0.5s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
   .tile-picker-window.open {
     margin-left: 0; }
   .tile-picker-window .tile-list {

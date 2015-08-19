@@ -18,7 +18,8 @@ define(function(require) {
       rotateClockwiseBtn: '#rotate-clockwise',
       rotateCounterBtn: '#rotate-counter-clockwise',
       newTileBtn: '#new-tile',
-      clearMapBtn: '#clear-tiles'
+      clearMapBtn: '#clear-tiles',
+      tileActionBtns: '.js-tile-action'
     },
 
     events: {
@@ -28,13 +29,30 @@ define(function(require) {
       "click @ui.clearMapBtn": "onClearTilesBtnClick"
     },
 
+    initialize: function(options) {
+      this.addListeners();
+    },
+
+    addListeners: function() {
+      Radio.reply('toolbarView', 'tileSelected', this.enableTileActions, this);
+      Radio.reply('toolbarView', 'tileDeselected', this.disableTileActions, this);
+    },
+
+    enableTileActions: function() {
+      this.ui.tileActionBtns.removeClass('disabled');
+    },
+
+    disableTileActions: function() {
+      this.ui.tileActionBtns.addClass('disabled');
+    },
+
     onRotateClockwiseClick: _.throttle(function() {
       Radio.request('mapView', 'rotateClockwise');
-    }, 400, {trailing: false}),
+    }, 600, {trailing: false}),
 
     onRotateCounterBtnClick: _.throttle(function() {
       Radio.request('mapView', 'rotateCounterClockwise');
-    }, 400, {trailing: false}),
+    }, 600, {trailing: false}),
 
     onNewTileBtnClick: function() {
       Radio.request('tilePickerView', 'toggleOpen');

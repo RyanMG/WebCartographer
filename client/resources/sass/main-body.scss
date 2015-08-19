@@ -10,6 +10,7 @@ body {
   @include perspective(500);
 }
 
+// Generic app wide styles
 .btn {
   display: inline-block;
   word-spacing: normal;
@@ -20,7 +21,14 @@ body {
   width: 40px;
   font-size: 0.6rem;
   text-align: center;
-  background-color: $light-gray;
+  background-color: $button-gray;
+  color: $gray5;
+
+  &.disabled {
+  	background-color: $button-disabled;
+  	color: $gray4;
+  	cursor: not-allowed;
+  }
 
   @include media-desktop-only {
     width: 141px;
