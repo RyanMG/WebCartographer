@@ -25,7 +25,10 @@ define(function(require) {
     ui: {},
 
     events: {
-      'click': 'onClick'
+      'click'     : 'onClick',
+      'dragstart' : 'onDragStart',
+      'dragend'   : 'onDragEnd',
+      'drop'      : 'onDrop'
     },
 
     modelEvents: {
@@ -42,19 +45,19 @@ define(function(require) {
 
     onBeforeRender: function() {
       this.updatePosition();
-      this.selectTile();
+      this.select();
     },
 
     onClick: function() {
-      this.selectTile();
+      this.select();
     },
 
-    selectTile: function() {
+    select: function() {
       this.triggerMethod('child:selected');
       this.$el.addClass('selected animated').attr('draggable', true);
     },
 
-    deselectTile: function() {
+    deselect: function() {
       this.$el.removeClass('selected animated').attr('draggable', false);
     },
 
@@ -89,6 +92,39 @@ define(function(require) {
     rotateCounterClockwise: function() {
       var newRotation = this.model.get('rotation') - 90;
       this.model.set('rotation', newRotation);
+    },
+
+    move: function(tileData, positionData) {
+      var tileX    = tileData.x
+        , tileY    = tileData.y
+        , posX     = positionData.mapX - tileX
+        , posY     = positionData.mapY - tileY
+        , currentX = Math.round(posX / 32) * 32
+        , currentY = Math.round(posY / 32) * 32;
+
+      this.model.set({
+        currentX: currentX,
+        currentY: currentY
+      });
+    },
+
+    onDragStart: function(evt) {
+      var xPos     = evt.originalEvent.offsetX
+        , yPos     = evt.originalEvent.offsetY
+        , tileData = { x: xPos, y: yPos };
+
+      Radio.request('mapView', 'start:dragTile', {
+        tileData : tileData,
+        isNew    : false
+      });
+    },
+
+    onDragEnd: function() {
+      Radio.request('mapView', 'end:dragTile');
+    },
+
+    onDrop: function() {
+      console.log('drop');
     }
 
   });

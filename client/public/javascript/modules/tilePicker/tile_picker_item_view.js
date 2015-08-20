@@ -38,12 +38,17 @@ define(function(require) {
     }, 550, {trailing: false}),
 
     onDragStart: function(evt) {
-      var xPos    = evt.originalEvent.offsetX
-        , yPos    = evt.originalEvent.offsetY
-        , imgSrc  = evt.target.src
-        , textObj = JSON.stringify( { x: xPos, y: yPos, src: imgSrc } );
+      var xPos     = evt.originalEvent.offsetX
+        , yPos     = evt.originalEvent.offsetY
+        , imgSrc   = evt.target.src
+        , tileData = { x: xPos, y: yPos, src: imgSrc };
 
-      evt.originalEvent.dataTransfer.setData( 'text', textObj );
+      Radio.request('mapView', 'start:dragTile', {
+        tileData : tileData,
+        isNew    : true
+      });
+
+      evt.originalEvent.dataTransfer.setData( 'text', ' ' );
       this.toggleOpen(false);
     },
 
@@ -52,6 +57,7 @@ define(function(require) {
     },
 
     onDragEnd: function(evt) {
+      Radio.request('mapView', 'end:dragTile');
       this.toggleOpen(true);
     }
   });

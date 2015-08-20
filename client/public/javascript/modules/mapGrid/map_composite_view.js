@@ -30,7 +30,6 @@ define(function(require) {
     events: {
       'dragover'  : 'preventDefaultEvent',
       'dragenter' : 'preventDefaultEvent',
-      'drop'      : 'onTileDrop',
       'click'     : 'onMapClick'
     },
 
@@ -61,14 +60,24 @@ define(function(require) {
     addListeners: function() {
       Radio.reply('mapView', 'rotateClockwise', this.rotateClockwise, this);
       Radio.reply('mapView', 'rotateCounterClockwise', this.rotateCounterClockwise, this);
-      Radio.reply('mapView', 'addNewTile', this.addNewTile, this);
       Radio.reply('mapView', 'clearMap', this.clearMap, this);
       Radio.reply('mapView', 'updateGridOpacity', this.updateGridOpacity, this);
+
+      Radio.reply('mapView', 'start:dragTile', this.addDropEvent, this);
+      Radio.reply('mapView', 'end:dragTile', this.removeDropEvent, this);
     },
 
     onRender: function() {
       this.buildMap();
       this.addGrid();
+    },
+
+    addDropEvent: function(options) {
+      this.$el.on('drop', options, this.onTileDrop.bind(this) );
+    },
+
+    removeDropEvent: function() {
+      this.$el.off('drop');
     },
 
     buildMap: function() {
@@ -115,15 +124,17 @@ define(function(require) {
       evt.stopPropagation();
       if (!evt.target.id || evt.target.id !== 'tiles') return false;
 
-      var tileData = JSON.parse( evt.originalEvent.dataTransfer.getData( 'text' ) )
-        , newTile;
+      var tileData = evt.data.tileData
+        , dropData = {
+            mapX : evt.originalEvent.offsetX || 0,
+            mapY : evt.originalEvent.offsetY || 0
+          };
 
-      dropData = {
-        mapX : evt.originalEvent.offsetX || 0,
-        mapY : evt.originalEvent.offsetY || 0
-      };
-
-      newTile = this.collection.add(tileData, dropData);
+      if (evt.data.isNew) {
+        this.collection.add(tileData, dropData);
+      } else {
+        this.selectedChild.move(tileData, dropData);
+      }
     },
 
     onMapClick: function(evt) {
