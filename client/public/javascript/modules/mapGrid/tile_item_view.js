@@ -33,9 +33,15 @@ define(function(require) {
       Mn.mergeOptions(this, options, this.mergeOptions);
       this.id = this.model.id;
       this.animating = false;
+
+      var posX = this.model.get('currentX')
+        , posY = this.model.get('currentY');
+
       this.position = {
-        x        : this.model.get('currentX'),
-        y        : this.model.get('currentY'),
+        x        : posX,
+        start_x  : posX,
+        y        : posY,
+        start_y  : posY,
         rotation : this.model.get('rotation')
       };
     },
@@ -87,30 +93,28 @@ define(function(require) {
 
     rotateClockwise: function() {
       this.position.rotation += 90;
-      requestPositionUpdate();
+      this.requestPositionUpdate();
       this.model.set('rotation', this.position.rotation);
     },
 
     rotateCounterClockwise: function() {
       this.position.rotation -= 90;
-      requestPositionUpdate();
+      this.requestPositionUpdate();
       this.model.set('rotation', this.position.rotation);
     },
 
     onPan: function(evt) {
-      transform.translate = {
-        x: START_X + evt.deltaX,
-        y: START_Y + evt.deltaY
-      };
-      requestPositionUpdate();
+      this.position.x = this.position.start_x + evt.deltaX;
+      this.position.y = this.position.start_y + evt.deltaY;
+      this.requestPositionUpdate();
     },
 
     onPanEnd: function(evt) {
-      transform.translate.x = Math.round(transform.translate.x / 32) * 32;
-      transform.translate.y = Math.round(transform.translate.y / 32) * 32;
-      START_X = transform.translate.x;
-      START_Y = transform.translate.y;
-      requestElementUpdate();
+      this.position.x = Math.round(this.position.x / 32) * 32;
+      this.position.y = Math.round(this.position.y / 32) * 32;
+      this.position.start_x = this.position.x;
+      this.position.start_y = this.position.y;
+      this.requestPositionUpdate();
     }
   });
 
