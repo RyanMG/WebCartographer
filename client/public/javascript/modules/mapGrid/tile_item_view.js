@@ -1,8 +1,9 @@
 define(function(require) {
 
-  var Mn    = require('marionette')
-    , Radio = require('backbone.radio')
-    , rAF   = require('../../utilities/request-animation-frame');
+  var Mn     = require('marionette')
+    , Radio  = require('backbone.radio')
+    , Hammer = require('hammer')
+    , rAF    = require('../../utilities/request-animation-frame');
 
   return Mn.ItemView.extend({
 
@@ -25,20 +26,18 @@ define(function(require) {
     ui: {},
 
     events: {
-      'click'     : 'onClick',
-      'dragstart' : 'onDragStart',
-      'dragend'   : 'onDragEnd',
-      'drop'      : 'onDrop'
-    },
-
-    modelEvents: {
-      'change:currentX change:currentX change:rotation' : 'requestPositionUpdate'
+      'click' : 'onClick'
     },
 
     initialize: function(options) {
       Mn.mergeOptions(this, options, this.mergeOptions);
       this.id = this.model.id;
       this.animating = false;
+      this.position = {
+        x        : this.model.get('currentX'),
+        y        : this.model.get('currentY'),
+        rotation : this.model.get('rotation')
+      };
     },
 
     addListeners: function() {},
@@ -55,6 +54,11 @@ define(function(require) {
     select: function() {
       this.triggerMethod('child:selected');
       this.$el.addClass('selected animated').attr('draggable', true);
+      var manager = new Hammer.Manager(this.el);
+
+      manager.add(new Hammer.Pan({ threshold: 0, pointers: 0 }));
+      manager.on('panstart panmove', this.onPan.bind(this) );
+      manager.on('panend', this.onPanEnd.bind(this) );
     },
 
     deselect: function() {
@@ -69,12 +73,9 @@ define(function(require) {
     },
 
     updatePosition: function() {
-      var xPos     = this.model.get('currentX')
-        , yPos     = this.model.get('currentY')
-        , rotation = this.model.get('rotation')
-        , value    = [
-            'translate(' + xPos + 'px, ' + yPos + 'px)',
-            'rotate(' + rotation + 'deg)'
+      var value    = [
+            'translate(' + this.position.x + 'px, ' + this.position.y + 'px)',
+            'rotate(' + this.position.rotation + 'deg)'
           ];
 
       value = value.join(" ");
@@ -85,48 +86,32 @@ define(function(require) {
     },
 
     rotateClockwise: function() {
-      var newRotation = this.model.get('rotation') + 90;
-      this.model.set('rotation', newRotation);
+      this.position.rotation += 90;
+      requestPositionUpdate();
+      this.model.set('rotation', this.position.rotation);
     },
 
     rotateCounterClockwise: function() {
-      var newRotation = this.model.get('rotation') - 90;
-      this.model.set('rotation', newRotation);
+      this.position.rotation -= 90;
+      requestPositionUpdate();
+      this.model.set('rotation', this.position.rotation);
     },
 
-    move: function(tileData, positionData) {
-      var tileX    = tileData.x
-        , tileY    = tileData.y
-        , posX     = positionData.mapX - tileX
-        , posY     = positionData.mapY - tileY
-        , currentX = Math.round(posX / 32) * 32
-        , currentY = Math.round(posY / 32) * 32;
-
-      this.model.set({
-        currentX: currentX,
-        currentY: currentY
-      });
+    onPan: function(evt) {
+      transform.translate = {
+        x: START_X + evt.deltaX,
+        y: START_Y + evt.deltaY
+      };
+      requestPositionUpdate();
     },
 
-    onDragStart: function(evt) {
-      var xPos     = evt.originalEvent.offsetX
-        , yPos     = evt.originalEvent.offsetY
-        , tileData = { x: xPos, y: yPos };
-
-      Radio.request('mapView', 'start:dragTile', {
-        tileData : tileData,
-        isNew    : false
-      });
-    },
-
-    onDragEnd: function() {
-      Radio.request('mapView', 'end:dragTile');
-    },
-
-    onDrop: function() {
-      console.log('drop');
+    onPanEnd: function(evt) {
+      transform.translate.x = Math.round(transform.translate.x / 32) * 32;
+      transform.translate.y = Math.round(transform.translate.y / 32) * 32;
+      START_X = transform.translate.x;
+      START_Y = transform.translate.y;
+      requestElementUpdate();
     }
-
   });
 
 });

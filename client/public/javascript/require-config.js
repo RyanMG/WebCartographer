@@ -7,14 +7,15 @@
   var requireConfig = {};
 
   requireConfig.paths = {
-    modernizr: "../vendor/modernizr/modernizr",
-    underscore: "../vendor/underscore/underscore",
-    marionette: "../vendor/marionette/lib/backbone.marionette",
-    backbone: "../vendor/backbone/backbone",
-    "backbone.radio": "../vendor/backbone.radio/build/backbone.radio",
-    "backbone.babysitter": "../vendor/backbone.babysitter/lib/backbone.babysitter",
-    jquery: "../vendor/jquery/dist/jquery",
-    handlebars: "../vendor/handlebars/handlebars.amd"
+    "modernizr"           : "../vendor/modernizr/modernizr",
+    "underscore"          : "../vendor/underscore/underscore",
+    "marionette"          : "../vendor/marionette/lib/backbone.marionette",
+    "backbone"            : "../vendor/backbone/backbone",
+    "backbone.radio"      : "../vendor/backbone.radio/build/backbone.radio",
+    "backbone.babysitter" : "../vendor/backbone.babysitter/lib/backbone.babysitter",
+    "jquery"              : "../vendor/jquery/dist/jquery",
+    "handlebars"          : "../vendor/handlebars/handlebars.amd",
+    "hammer"              : "../vendor/hammerjs/hammer"
   };
 
   requireConfig.shim = {
@@ -28,6 +29,9 @@
     },
     "handlebars": {
       exports: "Handlebars"
+    },
+    hammer: {
+      exports: 'Hammer'
     }
   };
 
