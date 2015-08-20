@@ -28,7 +28,7 @@ define(function(require) {
 
     showMainView: function(view) {
       var ToolbarView    = require('modules/toolbar/toolbar_item_view')
-        , MapView        = require('modules/mapGrid/map_composite_view')
+        , MapView        = require('modules/mapGrid/map_layout_view')
         , TileCollection = require('modules/mapGrid/entities/tile_entity')
         , TilePickerView = require('modules/tilePicker/tile_picker_item_view')
         , SettingsView   = require('modules/settings/settings_item_view');

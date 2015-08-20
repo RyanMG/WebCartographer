@@ -50,7 +50,7 @@ define(function(require) {
       this.ui.opacityText.text(rawNumber).css({
         'padding-left': offset + 'px'
       });
-      Radio.request('mapView', 'updateGridOpacity', newOpacity);
+      Radio.request('gridView', 'updateGridOpacity', newOpacity);
     }
 
   });
