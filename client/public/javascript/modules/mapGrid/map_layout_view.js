@@ -1,30 +1,28 @@
 define(function(require) {
 
   var Mn                 = require('marionette')
-    , Radio              = require('backbone.radio')
-    , TileItemView       = require('./tile_item_view');
+    , Radio              = require('backbone.radio');
 
   return Mn.Layout.extend({
 
     attributes: {
-      'data-view-name' : 'map_composite_view',
+      'data-view-name' : 'map_layout_view',
     },
 
     className: "mapGrid",
 
     template: "#map_layout",
 
-    childView : TileItemView,
-
-    childViewContainer: '@ui.tiles',
-
     mergeOptions: ['height', 'width', 'bg_texture'],
+
+    regions: {
+      grid  : '#grid-region',
+      tiles : '#tiles-region'
+    }.
 
     ui: {
       wrapper  : '#map-wrapper',
       backdrop : '#map-backdrop',
-      grid     : '#grid',
-      tiles    : '#tiles'
     },
 
     events: {

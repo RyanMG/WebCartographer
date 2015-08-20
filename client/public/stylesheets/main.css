@@ -162,7 +162,10 @@ html {
   .mapGrid #tiles {
     position: absolute;
     top: 0;
-    left: 0; }
+    left: 0;
+    overflow: hidden; }
+    .mapGrid #tiles.edit-mode {
+      overflow: visible; }
     .mapGrid #tiles .tile {
       background: #fff;
       opacity: 0.9;
