@@ -142,38 +142,38 @@ html {
   .mapGrid #map-backdrop {
     height: 100%;
     width: 100%; }
-  .mapGrid #grid {
+  .mapGrid .grid {
     position: absolute;
     left: 0;
     top: 0;
     background-color: transparent;
     overflow: hidden; }
-    .mapGrid #grid .grid-line {
+    .mapGrid .grid .grid-line {
       position: absolute;
       top: 0; }
-      .mapGrid #grid .grid-line.grid-line-v {
+      .mapGrid .grid .grid-line.grid-line-v {
         width: 1px;
         height: 100%;
         border-left: 1px solid #ddd; }
-      .mapGrid #grid .grid-line.grid-line-h {
+      .mapGrid .grid .grid-line.grid-line-h {
         width: 100%;
         height: 1px;
         border-top: 1px solid #ddd; }
-  .mapGrid #tiles {
+  .mapGrid .tiles {
     position: absolute;
     top: 0;
     left: 0;
     overflow: hidden; }
-    .mapGrid #tiles.edit-mode {
+    .mapGrid .tiles.edit-mode {
       overflow: visible; }
-    .mapGrid #tiles .tile {
+    .mapGrid .tiles .tile {
       background: #fff;
       opacity: 0.9;
       position: absolute;
       cursor: pointer; }
-      .mapGrid #tiles .tile.selected {
+      .mapGrid .tiles .tile.selected {
         opacity: 1.0; }
-      .mapGrid #tiles .tile.animated {
+      .mapGrid .tiles .tile.animated {
         -webkit-transition: all 0.3s;
         -moz-transition: all 0.3s;
         -o-transition: all 0.3s;

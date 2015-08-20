@@ -3,7 +3,7 @@ define(function(require) {
   var Mn     = require('marionette')
     , Radio  = require('backbone.radio')
     , Hammer = require('hammer')
-    , rAF    = require('../../utilities/request-animation-frame');
+    , rAF    = require('../../../utilities/request-animation-frame');
 
   return Mn.ItemView.extend({
 

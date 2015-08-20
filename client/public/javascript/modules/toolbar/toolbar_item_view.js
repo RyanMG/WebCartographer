@@ -49,11 +49,11 @@ define(function(require) {
     },
 
     onRotateClockwiseClick: function() {
-      Radio.request('mapView', 'rotateClockwise');
+      Radio.request('tileView', 'rotateClockwise');
     },
 
     onRotateCounterBtnClick: function() {
-      Radio.request('mapView', 'rotateCounterClockwise');
+      Radio.request('tileView', 'rotateCounterClockwise');
     },
 
     onNewTileBtnClick: function() {
@@ -65,7 +65,7 @@ define(function(require) {
     },
 
     onClearTilesBtnClick: function() {
-      Radio.request('mapView', 'clearMap');
+      Radio.request('tileView', 'clearMap');
     }
 
   });

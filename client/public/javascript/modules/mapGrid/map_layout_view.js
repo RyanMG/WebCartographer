@@ -1,7 +1,8 @@
 define(function(require) {
 
-  var Mn    = require('marionette')
-    , Radio = require('backbone.radio');
+  var Mn             = require('marionette')
+    , Radio          = require('backbone.radio')
+    , TileCollection = require('modules/mapGrid/entities/tile_entity');
 
   return Mn.LayoutView.extend({
 
@@ -37,6 +38,8 @@ define(function(require) {
     },
 
     setupMapVariables: function() {
+      this.tileHeight = this.height;
+      this.tileWidth  = this.width;
       this.height *= 32;
       this.width *= 32;
     },
@@ -46,15 +49,25 @@ define(function(require) {
       evt.stopPropagation();
     },
 
-    addListeners: function() {},
+    addListeners: function() {
+      Radio.reply('mapView', 'start:dragTile', this.addDropEvent, this);
+      Radio.reply('mapView', 'end:dragTile', this.removeDropEvent, this);
+    },
 
     onRender: function() {
       this.buildMap();
 
-      var GridView = require('./views/map_grid_item_view');
+      var GridView = require('./views/map_grid_item_view')
+        , TileView = require('./views/map_tiles_composite_view');
+
       this.getRegion('grid').show( new GridView({
+        tileH  : this.tileHeight,
+        tileW  : this.tileWidth,
         height : this.height,
         width  : this.width
+      }) );
+      this.getRegion('tiles').show( new TileView({
+        collection: new TileCollection()
       }) );
     },
 
@@ -73,6 +86,20 @@ define(function(require) {
       this.ui.backdrop.css({
         'background-image': texture
       });
+    },
+
+    addDropEvent: function(options) {
+      this.$el.on('drop', options, this.onTileDrop.bind(this) );
+    },
+
+    removeDropEvent: function() {
+      this.$el.off('drop');
+    },
+
+    onTileDrop: function(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      this.getRegion('tiles').currentView.triggerMethod('tileDrop', evt);
     }
 
   });

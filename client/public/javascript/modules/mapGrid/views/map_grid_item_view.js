@@ -1,7 +1,7 @@
 define(function(require) {
 
-  var Mn                 = require('marionette')
-    , Radio              = require('backbone.radio');
+  var Mn    = require('marionette')
+    , Radio = require('backbone.radio');
 
   return Mn.ItemView.extend({
 
@@ -9,9 +9,11 @@ define(function(require) {
       'data-view-name' : 'map_grid_item_view',
     },
 
+    className: 'grid',
+
     template: _.template(""),
 
-    mergeOptions: ['height', 'width'],
+    mergeOptions: ['height', 'width', 'tileH', 'tileW'],
 
     initialize: function(options) {
       Mn.mergeOptions(this, options, this.mergeOptions);
@@ -38,11 +40,11 @@ define(function(require) {
         'opacity' : this.gridOpacity
       });
 
-      for (var i = 1; i < this.numHeightTiles; i++) {
+      for (var i = 1; i < this.tileH; i++) {
         $('<div class="grid-line grid-line-v">').css({ left: i * 32 }).appendTo(this.$el);
       }
 
-      for (var i = 1; i < this.numWidthTiles; i++) {
+      for (var i = 1; i < this.tileW; i++) {
         $('<div class="grid-line grid-line-h">').css({ top: i * 32 }).appendTo(this.$el);
       }
     },
