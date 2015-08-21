@@ -5,7 +5,7 @@ html(lang="en-US")
     meta(name="apple-mobile-web-app-capable", content="yes")
     meta(name="apple-mobile-web-app-status-bar-style", content="black-translucent")
     meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no")
-    title Map Maker
+    title Web Cartographer
     link(rel="stylesheet" href="./vendor/normalize-css/normalize.css")
     link(rel="stylesheet" href="./stylesheets/main.css")
 
@@ -13,17 +13,26 @@ html(lang="en-US")
 
     div#main-region.full-h-w
 
-    script#app_layout(type="text/x-handlebars-template")
-      include templates/app_layout
-    script#toolbar_layout(type="text/x-handlebars-template")
-      include templates/toolbar_layout
-    script#map_layout(type="text/x-handlebars-template")
-      include templates/map_layout
-    script#tile_picker_layout(type="text/x-handlebars-template")
-      include templates/tile_picker_layout
-    script#settings_layout(type="text/x-handlebars-template")
-      include templates/settings_layout
-    //- script#dialog_template(type="text/x-handlebars-template")
-    //-   include templates/dialog_template
+    div#templates
+      script#app_layout(type="text/x-handlebars-template")
+        include templates/app_layout
+      script#toolbar_layout(type="text/x-handlebars-template")
+        include templates/toolbar_layout
+      script#map_layout(type="text/x-handlebars-template")
+        include templates/map_layout
+      script#tile_picker_layout(type="text/x-handlebars-template")
+        include templates/tile_picker_layout
+      script#settings_layout(type="text/x-handlebars-template")
+        include templates/settings_layout
+      script#status_layout(type="text/x-handlebars-template")
+        include templates/status_layout
+      script#map_details_layout(type="text/x-handlebars-template")
+        include templates/map_details_layout
+      script#tile_details_layout(type="text/x-handlebars-template")
+        include templates/tile_details_layout
+      script#tile_actions_layout(type="text/x-handlebars-template")
+        include templates/tile_actions_layout
+      //- script#dialog_template(type="text/x-handlebars-template")
+      //-   include templates/dialog_template
 
     script(data-main="./javascript/main.js", src="./vendor/requirejs/require.js")

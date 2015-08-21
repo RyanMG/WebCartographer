@@ -10,11 +10,12 @@ define(function(require) {
     el: '#main-region',
 
     regions: {
-      toolbar: "#app-toolbar-region",
-      map: "#app-map-region",
-      tilePicker: "#app-tile-picker-region",
-      dialog: "#app-dialog-region",
-      settings: "#app-settings-region"
+      toolbar    : "#app-toolbar-region",
+      map        : "#app-map-region",
+      tilePicker : "#app-tile-picker-region",
+      status     : "#app-status-region",
+      dialog     : "#app-dialog-region",
+      settings   : "#app-settings-region"
     },
 
     events: {
@@ -23,17 +24,18 @@ define(function(require) {
 
     initialize: function () {
       Radio.reply('rootView', 'show:mainView', this.showMainView, this);
-      window.app = this;
     },
 
     showMainView: function(view) {
       var ToolbarView    = require('modules/toolbar/toolbar_item_view')
         , MapView        = require('modules/mapGrid/map_layout_view')
         , TilePickerView = require('modules/tilePicker/tile_picker_item_view')
+        , StatusView     = require('modules/statusBar/status_layout_view')
         , SettingsView   = require('modules/settings/settings_item_view');
 
       this.getRegion('toolbar').show( new ToolbarView() );
       this.getRegion('tilePicker').show( new TilePickerView() );
+      this.getRegion('status').show( new StatusView() );
       this.getRegion('map').show( new MapView({
         height: 10,
         width: 10,

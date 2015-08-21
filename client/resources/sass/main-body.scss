@@ -10,7 +10,10 @@ body {
   @include perspective(500);
 }
 
-// Generic app wide styles
+/**
+ *  Generic app wide styles
+ *
+ */
 .btn {
   display: inline-block;
   word-spacing: normal;
@@ -18,7 +21,7 @@ body {
   cursor: pointer;
   padding: 8px 5px;
   height: 24px;
-  width: 40px;
+  width: 50px;
   font-size: 0.6rem;
   text-align: center;
   background-color: $button-gray;
@@ -64,11 +67,4 @@ label {
 input,
 select {
   width: 100%;
-}
-
-h2 {
-	display: block;
-	margin: 0 0 20px 0;
-	padding-bottom: 2px;
-	border-bottom: 2px solid $gray4;
 }

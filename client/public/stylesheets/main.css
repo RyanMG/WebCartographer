@@ -14,6 +14,10 @@ body {
   -webkit-perspective: 500;
   perspective: 500; }
 
+/**
+ *  Generic app wide styles
+ *
+ */
 .btn {
   display: inline-block;
   word-spacing: normal;
@@ -21,10 +25,10 @@ body {
   cursor: pointer;
   padding: 8px 5px;
   height: 24px;
-  width: 40px;
+  width: 50px;
   font-size: 0.6rem;
   text-align: center;
-  background-color: #ccc;
+  background-color: #eee;
   color: #222; }
   .btn.disabled {
     background-color: #aaa;
@@ -57,12 +61,6 @@ input,
 select {
   width: 100%; }
 
-h2 {
-  display: block;
-  margin: 0 0 20px 0;
-  padding-bottom: 2px;
-  border-bottom: 2px solid #999; }
-
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -94,7 +92,25 @@ h2 {
   font-feature-settings: 'liga'; }
 
 html {
-  font-size: 16px; }
+  font-size: 14px; }
+
+h1, h2, h3 {
+  display: block;
+  margin: 0 0 20px 0;
+  padding-bottom: 3px;
+  border-bottom: 2px solid #999; }
+
+h2 {
+  padding-bottom: 2px; }
+
+h3 {
+  margin: 0 0 12px 0;
+  padding-bottom: 1px;
+  border-bottom: 1px solid #999; }
+
+p {
+  font-size: 1rem;
+  margin: 4px 0; }
 
 .toolbar-region {
   height: 50px;
@@ -129,51 +145,54 @@ html {
       .toolbar-region .toolbar .btn:last-child {
         margin-right: 0px; }
 
-.mapGrid {
-  position: relative;
-  width: 100%;
+.map-region {
+  width: calc(100% - 220px);
   height: calc(100% - 50px);
+  display: inline-block; }
+
+.map-grid {
+  position: relative;
   background-color: #222; }
-  .mapGrid #map-wrapper {
+  .map-grid #map-wrapper {
     position: absolute;
     left: 50%;
     top: 50%;
     background-color: #000; }
-  .mapGrid #map-backdrop {
+  .map-grid #map-backdrop {
     height: 100%;
     width: 100%; }
-  .mapGrid .grid {
+  .map-grid .grid {
     position: absolute;
     left: 0;
     top: 0;
     background-color: transparent;
     overflow: hidden; }
-    .mapGrid .grid .grid-line {
+    .map-grid .grid .grid-line {
       position: absolute;
       top: 0; }
-      .mapGrid .grid .grid-line.grid-line-v {
+      .map-grid .grid .grid-line.grid-line-v {
         width: 1px;
         height: 100%;
         border-left: 1px solid #ddd; }
-      .mapGrid .grid .grid-line.grid-line-h {
+      .map-grid .grid .grid-line.grid-line-h {
         width: 100%;
         height: 1px;
         border-top: 1px solid #ddd; }
-  .mapGrid .tiles {
+  .map-grid .tiles {
     position: absolute;
     top: 0;
     left: 0;
     overflow: hidden; }
-    .mapGrid .tiles.edit-mode {
+    .map-grid .tiles.edit-mode {
       overflow: visible; }
-    .mapGrid .tiles .tile {
+    .map-grid .tiles .tile {
       background: #fff;
       opacity: 0.9;
       position: absolute;
       cursor: pointer; }
-      .mapGrid .tiles .tile.selected {
+      .map-grid .tiles .tile.selected {
         opacity: 1.0; }
-      .mapGrid .tiles .tile.animated {
+      .map-grid .tiles .tile.animated {
         -webkit-transition: all 0.3s;
         -moz-transition: all 0.3s;
         -o-transition: all 0.3s;
@@ -213,6 +232,46 @@ html {
     .tile-picker-window .tile-list .tile-icon {
       display: block;
       margin: 0 auto 10px; }
+
+.status-bar {
+  height: calc(100% - 50px);
+  width: 220px;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #ccc;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
+  .status-bar > * {
+    padding: 20px 10px 10px; }
+  .status-bar .tile-details {
+    margin: 0 auto; }
+    .status-bar .tile-details .current-tile-image {
+      height: 150px;
+      width: 150px;
+      padding: 10px;
+      margin: 0 auto 10px;
+      border: 2px solid #999; }
+    .status-bar .tile-details .no-tile-selected {
+      text-align: center;
+      font-style: italic; }
+    .status-bar .tile-details .current-tile-details {
+      display: none; }
+    .status-bar .tile-details.details-shown .no-tile-selected {
+      display: none; }
+    .status-bar .tile-details.details-shown .current-tile-details {
+      display: block; }
+  .status-bar .tile-actions .tile-action-group {
+    width: 100%;
+    display: inline-block;
+    text-align: center; }
+    .status-bar .tile-actions .tile-action-group .btn {
+      margin: 10px; }
+      .status-bar .tile-actions .tile-action-group .btn.remove-tile-btn {
+        width: 100px; }
 
 .settings {
   height: calc(100% - 50px);
