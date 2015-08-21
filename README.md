@@ -1,2 +1,5 @@
-# WebCartographer
-2D tile map maker for PnP role playing games
+#Jetski - Client
+
+Client side app for Jetski
+
+TODO: Define use, startup, dependencies
