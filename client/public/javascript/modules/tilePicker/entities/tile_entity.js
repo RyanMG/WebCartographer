@@ -1,6 +1,7 @@
 define(function(require) {
 
-  var BackBone      = require('backbone');
+  var BackBone = require('backbone')
+    , _        = require('underscore');
 
   var TileModel = BackBone.Model.extend({
 
@@ -19,10 +20,12 @@ define(function(require) {
 
     model: TileModel,
 
-    url: '/tiles',
+    url: 'http://localhost:8080/tiles',
 
     parse: function(data) {
-      debugger;
+      return _.map(data, function(model) {
+        return _.omit(model, ['updatedAt', 'createdAt']);
+      });
     },
 
   });

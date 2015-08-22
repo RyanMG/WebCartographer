@@ -24,11 +24,12 @@ define(function(require) {
       'dragend @ui.icon'   : 'onDragEnd'
     },
 
+    collectionEvents: {
+      'add': 'render'
+    },
+
     initialize: function() {
-      this.collection.fetch()
-        .done(function(models) {
-          debugger;
-        });
+      this.collection.fetch();
       this.addListeners();
     },
 
