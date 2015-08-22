@@ -1,8 +1,8 @@
 define(function(require) {
 
   var Mn     = require('marionette')
-    , Radio  = require('backbone.radio')
     , Hammer = require('hammer')
+    , _      = require('underscore')
     , rAF    = require('../../../utilities/request-animation-frame');
 
   return Mn.ItemView.extend({
@@ -12,7 +12,7 @@ define(function(require) {
       return {
         'data-view-name' : 'tile_item_view',
         'src'            : src
-      }
+      };
     },
 
     tagName: 'img',

@@ -1,4 +1,6 @@
-define(function(require){\
+define(function(require) {
+
+  var Mn = require('marionette');
 
   return Mn.ItemView.extend({
 
@@ -6,9 +8,7 @@ define(function(require){\
 
     className: 'dialog',
 
-    initialize: function initialize() {
-      this.addToBabySitter();
-    },
+    initialize: function() {},
 
     ui: {
       form: 'form',
@@ -19,24 +19,8 @@ define(function(require){\
       'click @ui.submitBtn': 'onSubmitBtnClick'
     },
 
-    onSubmitBtnClick: function onSubmitBtnClick(evt) {
+    onSubmitBtnClick: function(evt) {
       evt.preventDefault();
-      var newMapOptions = {
-          height  : this.ui.form.find('[name='sizeHeight']').val()
-        , width   : this.ui.form.find('[name='sizeWidth']').val()
-        , texture : this.ui.form.find('[name='background']').val()
-      };
-
-      App.command('Navbar:DialogController:hideMapDialog');
-      App.command('App:MainController:buildNewMap', newMapOptions);
-    },
-
-    addToBabySitter: function addToBabySitter() {
-      AppLayoutBabySitter.add(this, 'BabySitter:App:AppLayout:DialogLayout');
-    },
-
-    onDestroy: function onDestroy() {
-      AppLayoutBabySitter.remove(this);
     }
   });
 

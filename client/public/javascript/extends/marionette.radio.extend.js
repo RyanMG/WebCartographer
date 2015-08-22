@@ -3,8 +3,6 @@ define(function(require) {
   var Marionette = require('marionette')
     , Radio      = require('backbone.radio')
     , _          = require('underscore');
-
-  'use strict';
  
   /**
    * Applications create a Channel when being instantiated.

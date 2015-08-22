@@ -1,6 +1,7 @@
 define(function(require) {
 
-  var touchCoordinateVariable = navigator.userAgent.match(/OS [1-4](?:_\d+)+ like Mac/) ? 'page' : 'client';
+  var touchCoordinateVariable = navigator.userAgent.match(/OS [1-4](?:_\d+)+ like Mac/) ? 'page' : 'client'
+    , _                       = require('underscore');
 
   function DragDrop(evt, el, isTouch) {
 
@@ -11,7 +12,6 @@ define(function(require) {
     this.dragImageWebKitTransform = null;
     this.el = el || evt.target;
     this.isTouch = isTouch || false;
-    this.moveHandler, this.endHandler, this.canceHandler;
 
     if (isTouch) {
       this.dispatchDragStart();
@@ -29,9 +29,14 @@ define(function(require) {
 
     listen: function() {
 
+      function ontouchend(evt) {
+        this.dragend(evt, evt.target);
+        this.cleanup();
+      }
+
       if (this.isTouch) {
-        this.moveHandler  = _onEvt(document, 'touchmove', this.move, this)
-        this.endHandler   = _onEvt(document, 'touchend', ontouchend, this)
+        this.moveHandler  = _onEvt(document, 'touchmove', this.move, this);
+        this.endHandler   = _onEvt(document, 'touchend', ontouchend, this);
         this.canceHandler = _onEvt(document, 'touchcancel', this.cleanup, this);
 
       } else {
@@ -40,16 +45,11 @@ define(function(require) {
 
       _onEvt(document, 'dragover', this.preventDefaultEvent, this);
       _onEvt(document, 'dragenter', this.preventDefaultEvent, this);
-
-      function ontouchend(evt) {
-        this.dragend(evt, evt.target);
-        this.cleanup();
-      }
     },
 
     cleanup: function() {
       this.dragDataTypes = [];
-      if (this.dragImage != null) {
+      if (this.dragImage !== null) {
         this.dragImage.parentNode.removeChild(this.dragImage);
         this.dragImage = null;
         this.dragImageTransform = null;
@@ -81,15 +81,15 @@ define(function(require) {
     },
 
     hideDragImage: function() {
-      if (this.dragImage && this.dragImage.style['display'] != 'none') {
-        this.dragImageDisplay = this.dragImage.style['display'];
-        this.dragImage.style['display'] = 'none';
+      if (this.dragImage && this.dragImage.style.display !== 'none') {
+        this.dragImageDisplay = this.dragImage.style.display;
+        this.dragImage.style.display = 'none';
       }
     },
 
     showDragImage: function() {
       if (this.dragImage) {
-        this.dragImage.style['display'] = this.dragImageDisplay ? this.dragImageDisplay : 'block';
+        this.dragImage.style.display = this.dragImageDisplay ? this.dragImageDisplay : 'block';
       }
     },
 
@@ -102,7 +102,7 @@ define(function(require) {
         this.dragImage.style['-webkit-transform'] = this.dragImageWebKitTransform + translate;
       }
       if (this.dragImageTransform !== null) {
-        this.dragImage.style['transform'] = this.dragImageTransform + translate;
+        this.dragImage.style.transform = this.dragImageTransform + translate;
       }
       if ( !_.isUndefined(zIndex) ) {
         this.dragImage.style['z-index'] = zIndex;
@@ -112,11 +112,11 @@ define(function(require) {
     dragend: function(evt) {
 
       this.hideDragImage();
-      var target = _elementFromTouchEvent(this.el, evt)
+      var target = _elementFromTouchEvent(this.el, evt);
       this.showDragImage();
 
       if (target) {
-        this.dispatchDrop(target, evt)
+        this.dispatchDrop(target, evt);
       }
 
       var dragendEvt = document.createEvent('Event');
@@ -153,7 +153,7 @@ define(function(require) {
       evt.dataTransfer = {
         setData: function(type, val) {
           this.dragData[type] = val;
-          if (this.dragDataTypes.indexOf(type) == -1) {
+          if (this.dragDataTypes.indexOf(type) === -1) {
             this.dragDataTypes[this.dragDataTypes.length] = type;
           }
           return val;
@@ -168,7 +168,7 @@ define(function(require) {
         var dragImgNode = this.createDragImage();
         // this.translateDragImage(0, 0, -1);
         evt.originalEvent.dataTransfer.setDragImage(dragImgNode, 0, 0);
-        el.classList.add('is-being-dragged')
+        el.classList.add('is-being-dragged');
       }
 
       evt.originalEvent.dataTransfer.setData( 'text', '' );
@@ -179,16 +179,16 @@ define(function(require) {
 
       _duplicateStyle(this.el, this.dragImage);
 
-      this.dragImage.style['position'] = 'absolute';
-      this.dragImage.style['left'] = '0px';
-      this.dragImage.style['top'] = '0px';
+      this.dragImage.style.position = 'absolute';
+      this.dragImage.style.left = '0px';
+      this.dragImage.style.top = '0px';
       this.dragImage.style['z-index'] = '999999';
       this.dragImage.style['pointer-events'] = 'none';
 
-      var transform = this.dragImage.style['transform'];
+      var transform = this.dragImage.style.transform;
       if (typeof transform !== 'undefined') {
         this.dragImageTransform = '';
-        if (transform != 'none') {
+        if (transform !== 'none') {
           this.dragImageTransform = transform.replace(/translate\(\D*\d+[^,]*,\D*\d+[^,]*\)\s*/g, '');
         }
       }
@@ -196,7 +196,7 @@ define(function(require) {
       var webkitTransform = this.dragImage.style['-webkit-transform'];
       if (typeof webkitTransform !== 'undefined') {
         this.dragImageWebKitTransform = '';
-        if (webkitTransform != 'none') {
+        if (webkitTransform !== 'none') {
           this.dragImageWebKitTransform = webkitTransform.replace(/translate\(\D*\d+[^,]*,\D*\d+[^,]*\)\s*/g, '');
         }
       }
@@ -204,11 +204,11 @@ define(function(require) {
       document.body.appendChild(this.dragImage);
       return this.dragImage;
     }
-  }
+  };
 
   function _duplicateStyle(srcNode, dstNode) {
     // Is this node an element?
-    if (srcNode.nodeType == 1) {
+    if (srcNode.nodeType === 1) {
       // Remove any potential conflict attributes
       dstNode.removeAttribute('id');
       dstNode.removeAttribute('class');
@@ -230,11 +230,14 @@ define(function(require) {
       touch[touchCoordinateVariable + 'X'],
       touch[touchCoordinateVariable + 'Y']
     );
-    return target
+    return target;
   }
 
   function _onEvt(el, evt, handler, context) {
-    if(context) handler = handler.bind(context)
+    if (context) {
+      handler = handler.bind(context);
+    }
+
     el.addEventListener(evt, handler);
     return {
       off: function() {
@@ -244,10 +247,15 @@ define(function(require) {
   }
 
   function _average(arr) {
-    if (arr.length === 0) return 0;
-    return arr.reduce((function(s, v) {
+    if (arr.length === 0) {
+      return 0;
+    }
+
+    var total = arr.reduce(function(s, v) {
       return v + s;
-    }), 0) / arr.length;
+    }, 0);
+
+    return total / arr.length;
   }
 
   return DragDrop;

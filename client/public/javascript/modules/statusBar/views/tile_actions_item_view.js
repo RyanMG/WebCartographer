@@ -1,7 +1,6 @@
 define(function(require) {
 
-  var Mn     = require('marionette')
-    , Radio  = require('backbone.radio');
+  var Mn     = require('marionette');
 
   return Mn.ItemView.extend({
 

@@ -16,4 +16,4 @@ define(function(require) {
   Mn.ItemView.prototype.serializeCollection = function(collection) {
     return collection.map(function(model){ return this.serializeModel(model); }, this);
   };
-})
+});

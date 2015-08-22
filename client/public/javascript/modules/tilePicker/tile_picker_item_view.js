@@ -2,8 +2,7 @@ define(function(require) {
 
   var Mn       = require('marionette')
     , Radio    = require('backbone.radio')
-    , _        = require('underscore')
-    , DragDrop = require('../../utilities/drag-drop');
+    , _        = require('underscore');
 
   return Mn.ItemView.extend({
 

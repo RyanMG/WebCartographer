@@ -2,6 +2,7 @@ define(function(require) {
 
   var Mn           = require('marionette')
     , Radio        = require('backbone.radio')
+    , _            = require('underscore')
     , TileItemView = require('./tile_item_view');
 
   return Mn.CompositeView.extend({

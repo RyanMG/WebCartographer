@@ -10,8 +10,8 @@ require([
     'extends/all_extends'
   ], function(app) {
 
+    var Backbone = require('backbone');
     app.start();
-
     Backbone.history.start();
 
   });

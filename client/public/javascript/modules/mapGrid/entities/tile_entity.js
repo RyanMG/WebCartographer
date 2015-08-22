@@ -1,7 +1,8 @@
 define(function(require) {
 
   var BackBone      = require('backbone')
-    , _             = require('underscore');
+    , _             = require('underscore')
+    , $             = require('jquery');
 
   var TileModel = BackBone.Model.extend({
 

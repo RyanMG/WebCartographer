@@ -1,7 +1,9 @@
 define(function(require) {
 
   var Mn    = require('marionette')
-    , Radio = require('backbone.radio');
+    , Radio = require('backbone.radio')
+    , _     = require('underscore')
+    , $     = require('jquery');
 
   return Mn.ItemView.extend({
 
@@ -44,15 +46,15 @@ define(function(require) {
         $('<div class=\'grid-line grid-line-v\'>').css({ left: i * 32 }).appendTo(this.$el);
       }
 
-      for (var i = 1; i < this.tileW; i++) {
-        $('<div class=\'grid-line grid-line-h\'>').css({ top: i * 32 }).appendTo(this.$el);
+      for (var j = 1; j < this.tileW; j++) {
+        $('<div class=\'grid-line grid-line-h\'>').css({ top: j * 32 }).appendTo(this.$el);
       }
     },
 
     updateGridOpacity: function(newOpacity) {
       this.$el.css({
         'opacity': newOpacity
-      })
+      });
     }
 
   });
