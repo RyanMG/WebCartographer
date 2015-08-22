@@ -5,12 +5,18 @@ define(function(require) {
   return Mn.ItemView.extend({
 
     attributes: {
-      'data-view-name' : 'tile_details_item_view',
+      'data-view-name' : 'map_details_item_view',
     },
 
-    className: 'tile-details',
+    className: 'map-details',
 
-    template: '#tile_details_layout',
+    template: '#map_details_layout',
+
+    templateHelpers: {
+      mapName: 'My Map',
+      mapAuthor: 'David R Hall',
+      mapDescription: 'Darkest Dungeon'
+    },
 
     mergeOptions: [],
 

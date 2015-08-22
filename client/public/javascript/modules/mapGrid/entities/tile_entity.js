@@ -10,7 +10,7 @@ define(function(require) {
       name     : 'No Name',
       texture  : 'Unknown',
       feature  : 'Unknown',
-      wdith    : 0,
+      width    : 0,
       height   : 0,
       rotation : 0,
       currentX : 0,

@@ -1,7 +1,10 @@
 define(function(require) {
 
-  var Mn    = require('marionette')
-    , Radio = require('backbone.radio');
+  var Mn              = require('marionette')
+    , Radio           = require('backbone.radio')
+    , MapDetailsView  = require('./views/map_details_item_view')
+    , TileDetailsView = require('./views/tile_details_item_view')
+    , TileActionsView = require('./views/tile_actions_item_view');
 
   return Mn.LayoutView.extend({
 
@@ -37,10 +40,8 @@ define(function(require) {
     },
 
     onRender: function() {
-      var TileDetailsView = require('./views/tile_details_item_view')
-        , TileActionsView = require('./views/tile_actions_item_view');
-
-      this.getRegion('details').show( new TileDetailsView() );
+      this.getRegion('mapDetails').show( new MapDetailsView() );
+      this.getRegion('tileDetails').show( new TileDetailsView() );
       this.getRegion('actions').show( new TileActionsView() );
     }
 

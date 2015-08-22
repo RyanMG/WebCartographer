@@ -30,17 +30,26 @@ define(function(require) {
       var ToolbarView    = require('modules/toolbar/toolbar_item_view')
         , MapView        = require('modules/mapGrid/map_layout_view')
         , TilePickerView = require('modules/tilePicker/tile_picker_item_view')
+        , TileCollection = require('modules/tilePicker/entities/tile_entity')
         , StatusView     = require('modules/statusBar/status_layout_view')
         , SettingsView   = require('modules/settings/settings_item_view');
 
+      var tiles = new TileCollection();
+
       this.getRegion('toolbar').show( new ToolbarView() );
-      this.getRegion('tilePicker').show( new TilePickerView() );
+
+      this.getRegion('tilePicker').show( new TilePickerView({
+        collection: tiles
+      }) );
+
       this.getRegion('status').show( new StatusView() );
+
       this.getRegion('map').show( new MapView({
         height: 10,
         width: 10,
         bg_texture: 'wood'
       }) );
+
       this.getRegion('settings').show( new SettingsView() );
     },
 
