@@ -11,7 +11,7 @@ define(function(require) {
 
     className: 'grid',
 
-    template: _.template(""),
+    template: _.template(''),
 
     mergeOptions: ['height', 'width', 'tileH', 'tileW'],
 
@@ -41,11 +41,11 @@ define(function(require) {
       });
 
       for (var i = 1; i < this.tileH; i++) {
-        $('<div class="grid-line grid-line-v">').css({ left: i * 32 }).appendTo(this.$el);
+        $('<div class=\'grid-line grid-line-v\'>').css({ left: i * 32 }).appendTo(this.$el);
       }
 
       for (var i = 1; i < this.tileW; i++) {
-        $('<div class="grid-line grid-line-h">').css({ top: i * 32 }).appendTo(this.$el);
+        $('<div class=\'grid-line grid-line-h\'>').css({ top: i * 32 }).appendTo(this.$el);
       }
     },
 

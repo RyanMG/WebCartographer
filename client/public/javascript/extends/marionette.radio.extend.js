@@ -14,7 +14,7 @@ define(function(require) {
    * longer needs to be shipped with Marionette.
    * 
    * The channel used by the Application is specified by the `app#channelName` property,
-   * defaulting to "global."
+   * defaulting to 'global.''
    * 
    */
   Marionette.Application.prototype._initChannel = function () {

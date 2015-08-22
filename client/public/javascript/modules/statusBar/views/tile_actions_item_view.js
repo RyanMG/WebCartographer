@@ -9,9 +9,9 @@ define(function(require) {
       'data-view-name' : 'tile_actions_item_view',
     },
 
-    className: "tile-actions",
+    className: 'tile-actions',
 
-    template: "#tile_actions_layout",
+    template: '#tile_actions_layout',
 
     mergeOptions: [],
 

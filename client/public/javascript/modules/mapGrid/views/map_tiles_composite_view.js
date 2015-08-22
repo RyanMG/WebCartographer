@@ -10,9 +10,9 @@ define(function(require) {
       'data-view-name' : 'map_composite_view',
     },
 
-    className: "tiles full-h-w edit-mode",
+    className: 'tiles full-h-w edit-mode',
 
-    template: _.template(""),
+    template: _.template(''),
 
     childView : TileItemView,
 

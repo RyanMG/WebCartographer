@@ -17,9 +17,9 @@ define(function(require) {
 
     tagName: 'img',
 
-    className: "tile",
+    className: 'tile',
 
-    template: _.template(""),
+    template: _.template(''),
 
     mergeOptions: [],
 
@@ -85,7 +85,7 @@ define(function(require) {
             'rotate(' + this.position.rotation + 'deg)'
           ];
 
-      value = value.join(" ");
+      value = value.join(' ');
       this.el.style.webkitTransform = value;
       this.el.style.mozTransform = value;
       this.el.style.transform = value;

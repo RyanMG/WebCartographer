@@ -1,12 +1,21 @@
 module.exports = function(grunt) {
   "use strict";
 
+  require('load-grunt-tasks')(grunt); // preload dev files starting with 'grunt' from package.json
+
   grunt.initConfig({
+
+    pkg: grunt.file.readJSON('package.json'),
+
+    app: {
+      server : 'server',
+      client : 'client'
+    },
 
     jade: {
       compile: {
         expand: true,
-        cwd: 'resources/jade',
+        cwd: '<%= app.client %>/resources/jade',
         src: ['index.jade'],
         dest: 'public/',
         ext: '.html',
@@ -15,35 +24,46 @@ module.exports = function(grunt) {
         }
       }
     },
+
     sass: {
       options: {
         sourceMap: true
       },
       dist: {
         files: {
-          'public/stylesheets/main.css': 'resources/sass/main.scss'
+          '<%= app.client %>/public/stylesheets/main.css': '<%= app.client %>/resources/sass/main.scss'
         }
       }
     },
+
+    jshint: {
+      options: {
+        jshintrc : '.jshintrc'
+      },
+      src: ['<%= app.client %>/public/javascript/**/*.js']
+    },
+
     watch: {
-      compileStylus: {
-        files: [ 'resources/sass/**/*.scss' ],
+      lintJS: {
+        files: [ '<%= app.client %>/public/javascript/**/*.js' ],
+        tasks: [ 'jshint' ]        
+      },
+      compileSass: {
+        files: [ '<%= app.client %>/resources/sass/**/*.scss' ],
         tasks: [ 'compileSass' ]
       },
       compileJade: {
-        files: [ 'resources/jade/**/*.jade' ],
+        files: [ '<%= app.client %>/resources/jade/**/*.jade' ],
         tasks: [ 'compileJade' ]
       }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-jade');
-  grunt.loadNpmTasks('grunt-sass');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-
   grunt.registerTask('compileJade', ['jade']);
   grunt.registerTask('compileSass', ['sass:dist']);
 
-  grunt.registerTask('default', ['watch']);
+  grunt.registerTask('develop', 'Develop the application', ['watch', 'jshint']);
+
+  grunt.registerTask('default', ['develop']);
 
 };

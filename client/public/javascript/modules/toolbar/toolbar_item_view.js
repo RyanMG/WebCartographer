@@ -6,7 +6,7 @@ define(function(require) {
 
   return Mn.ItemView.extend({
 
-    template: "#toolbar_layout",
+    template: '#toolbar_layout',
 
     attributes: {
       'data-view-name' : 'toolbar_layout_view',

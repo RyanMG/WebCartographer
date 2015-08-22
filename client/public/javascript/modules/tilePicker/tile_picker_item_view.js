@@ -7,7 +7,7 @@ define(function(require) {
 
   return Mn.ItemView.extend({
 
-    template: "#tile_picker_layout",
+    template: '#tile_picker_layout',
 
     attributes: {
       'data-view-name' : 'tile_picker_layout_view',

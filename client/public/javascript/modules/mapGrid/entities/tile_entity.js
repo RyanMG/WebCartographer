@@ -56,7 +56,7 @@ define(function(require) {
   });
 
   var _buildElement = function(src) {
-    var elementString = "<img src='" + src + "' class='tile' draggable='true' />";
+    var elementString = '<img src=\'' + src + '\' class=\'tile\' draggable=\'true\' />';
     return $(elementString);
   };
 

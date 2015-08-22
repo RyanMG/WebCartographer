@@ -10,9 +10,9 @@ define(function(require) {
       'data-view-name' : 'map_layout_view',
     },
 
-    className: "map-grid full-h-w",
+    className: 'map-grid full-h-w',
 
-    template: "#map_layout",
+    template: '#map_layout',
 
     mergeOptions: ['height', 'width', 'bg_texture'],
 

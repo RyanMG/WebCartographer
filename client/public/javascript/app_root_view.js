@@ -5,17 +5,17 @@ define(function(require) {
 
   return Marionette.LayoutView.extend({
 
-    template: "#app_layout",
+    template: '#app_layout',
 
     el: '#main-region',
 
     regions: {
-      toolbar    : "#app-toolbar-region",
-      map        : "#app-map-region",
-      tilePicker : "#app-tile-picker-region",
-      status     : "#app-status-region",
-      dialog     : "#app-dialog-region",
-      settings   : "#app-settings-region"
+      toolbar    : '#app-toolbar-region',
+      map        : '#app-map-region',
+      tilePicker : '#app-tile-picker-region',
+      status     : '#app-status-region',
+      dialog     : '#app-dialog-region',
+      settings   : '#app-settings-region'
     },
 
     events: {

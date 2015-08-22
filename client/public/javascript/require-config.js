@@ -7,35 +7,35 @@
   var requireConfig = {};
 
   requireConfig.paths = {
-    "modernizr"           : "../vendor/modernizr/modernizr",
-    "underscore"          : "../vendor/underscore/underscore",
-    "marionette"          : "../vendor/marionette/lib/backbone.marionette",
-    "backbone"            : "../vendor/backbone/backbone",
-    "backbone.radio"      : "../vendor/backbone.radio/build/backbone.radio",
-    "backbone.babysitter" : "../vendor/backbone.babysitter/lib/backbone.babysitter",
-    "jquery"              : "../vendor/jquery/dist/jquery",
-    "handlebars"          : "../vendor/handlebars/handlebars.amd",
-    "hammer"              : "../vendor/hammerjs/hammer"
+    'modernizr'           : '../vendor/modernizr/modernizr',
+    'underscore'          : '../vendor/underscore/underscore',
+    'marionette'          : '../vendor/marionette/lib/backbone.marionette',
+    'backbone'            : '../vendor/backbone/backbone',
+    'backbone.radio'      : '../vendor/backbone.radio/build/backbone.radio',
+    'backbone.babysitter' : '../vendor/backbone.babysitter/lib/backbone.babysitter',
+    'jquery'              : '../vendor/jquery/dist/jquery',
+    'handlebars'          : '../vendor/handlebars/handlebars.amd',
+    'hammer'              : '../vendor/hammerjs/hammer'
   };
 
   requireConfig.shim = {
     backbone: {
-      deps: ["jquery", "underscore"],
-      exports: "Backbone"
+      deps: ['jquery', 'underscore'],
+      exports: 'Backbone'
     },
     marionette: {
-      deps: ["backbone"],
-      exports: "Marionette"
+      deps: ['backbone'],
+      exports: 'Marionette'
     },
-    "handlebars": {
-      exports: "Handlebars"
+    'handlebars': {
+      exports: 'Handlebars'
     },
     hammer: {
       exports: 'Hammer'
     }
   };
 
-  // Detect environment by checking for the presence of the "module" global:
+  // Detect environment by checking for the presence of the 'module' global:
   if (typeof module !== 'undefined' && module.exports) {
     // We are in Node: export the configuration objects for use elsewhere
     // (this avoids duplication of the entire Require paths and shim lists)
@@ -49,7 +49,7 @@
     useStrict: true,
     findNestedDependencies: true,
     // Cache-bust
-    // urlArgs: "bust=" + (new Date()).getTime(),
+    // urlArgs: 'bust=' + (new Date()).getTime(),
     waitSeconds: 30,
     paths: requireConfig.paths,
     shim: requireConfig.shim

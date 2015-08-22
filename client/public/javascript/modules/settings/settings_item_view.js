@@ -6,7 +6,7 @@ define(function(require) {
 
   return Mn.ItemView.extend({
 
-    template: "#settings_layout",
+    template: '#settings_layout',
 
     attributes: {
       'data-view-name' : 'settings_item_view',

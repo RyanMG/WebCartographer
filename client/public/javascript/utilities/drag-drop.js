@@ -1,6 +1,6 @@
 define(function(require) {
 
-  var touchCoordinateVariable = navigator.userAgent.match(/OS [1-4](?:_\d+)+ like Mac/) ? "page" : "client";
+  var touchCoordinateVariable = navigator.userAgent.match(/OS [1-4](?:_\d+)+ like Mac/) ? 'page' : 'client';
 
   function DragDrop(evt, el, isTouch) {
 
@@ -30,16 +30,16 @@ define(function(require) {
     listen: function() {
 
       if (this.isTouch) {
-        this.moveHandler  = _onEvt(document, "touchmove", this.move, this)
-        this.endHandler   = _onEvt(document, "touchend", ontouchend, this)
-        this.canceHandler = _onEvt(document, "touchcancel", this.cleanup, this);
+        this.moveHandler  = _onEvt(document, 'touchmove', this.move, this)
+        this.endHandler   = _onEvt(document, 'touchend', ontouchend, this)
+        this.canceHandler = _onEvt(document, 'touchcancel', this.cleanup, this);
 
       } else {
-        this.end = _onEvt(document, "dragend", this.cleanup, this);
+        this.end = _onEvt(document, 'dragend', this.cleanup, this);
       }
 
-      _onEvt(document, "dragover", this.preventDefaultEvent, this);
-      _onEvt(document, "dragenter", this.preventDefaultEvent, this);
+      _onEvt(document, 'dragover', this.preventDefaultEvent, this);
+      _onEvt(document, 'dragenter', this.preventDefaultEvent, this);
 
       function ontouchend(evt) {
         this.dragend(evt, evt.target);
@@ -81,31 +81,31 @@ define(function(require) {
     },
 
     hideDragImage: function() {
-      if (this.dragImage && this.dragImage.style["display"] != "none") {
-        this.dragImageDisplay = this.dragImage.style["display"];
-        this.dragImage.style["display"] = "none";
+      if (this.dragImage && this.dragImage.style['display'] != 'none') {
+        this.dragImageDisplay = this.dragImage.style['display'];
+        this.dragImage.style['display'] = 'none';
       }
     },
 
     showDragImage: function() {
       if (this.dragImage) {
-        this.dragImage.style["display"] = this.dragImageDisplay ? this.dragImageDisplay : "block";
+        this.dragImage.style['display'] = this.dragImageDisplay ? this.dragImageDisplay : 'block';
       }
     },
 
     // We use translate instead of top/left because of sub-pixel rendering and for the hope of better performance
     // http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
     translateDragImage: function(x, y, zIndex) {
-      var translate = " translate(" + x + "px," + y + "px)";
+      var translate = ' translate(' + x + 'px,' + y + 'px)';
 
       if (this.dragImageWebKitTransform !== null) {
-        this.dragImage.style["-webkit-transform"] = this.dragImageWebKitTransform + translate;
+        this.dragImage.style['-webkit-transform'] = this.dragImageWebKitTransform + translate;
       }
       if (this.dragImageTransform !== null) {
-        this.dragImage.style["transform"] = this.dragImageTransform + translate;
+        this.dragImage.style['transform'] = this.dragImageTransform + translate;
       }
       if ( !_.isUndefined(zIndex) ) {
-        this.dragImage.style["z-index"] = zIndex;
+        this.dragImage.style['z-index'] = zIndex;
       }
     },
 
@@ -119,14 +119,14 @@ define(function(require) {
         this.dispatchDrop(target, evt)
       }
 
-      var dragendEvt = document.createEvent("Event");
-      dragendEvt.initEvent("dragend", true, true);
+      var dragendEvt = document.createEvent('Event');
+      dragendEvt.initEvent('dragend', true, true);
       this.el.dispatchEvent(dragendEvt);
     },
 
     dispatchDrop: function(target, evt) {
-      var dropEvt = document.createEvent("Event");
-      dropEvt.initEvent("drop", true, true);
+      var dropEvt = document.createEvent('Event');
+      dropEvt.initEvent('drop', true, true);
 
       var touch = evt.changedTouches[0];
       var x = touch[touchCoordinateVariable + 'X'];
@@ -148,8 +148,8 @@ define(function(require) {
     },
 
     dispatchDragStart: function() {
-      var evt = document.createEvent("Event");
-      evt.initEvent("dragstart", true, true);
+      var evt = document.createEvent('Event');
+      evt.initEvent('dragstart', true, true);
       evt.dataTransfer = {
         setData: function(type, val) {
           this.dragData[type] = val;
@@ -158,7 +158,7 @@ define(function(require) {
           }
           return val;
         }.bind(this),
-        dropEffect: "move"
+        dropEffect: 'move'
       };
       this.el.dispatchEvent(evt);
     },
@@ -179,24 +179,24 @@ define(function(require) {
 
       _duplicateStyle(this.el, this.dragImage);
 
-      this.dragImage.style["position"] = "absolute";
-      this.dragImage.style["left"] = "0px";
-      this.dragImage.style["top"] = "0px";
-      this.dragImage.style["z-index"] = "999999";
-      this.dragImage.style["pointer-events"] = "none";
+      this.dragImage.style['position'] = 'absolute';
+      this.dragImage.style['left'] = '0px';
+      this.dragImage.style['top'] = '0px';
+      this.dragImage.style['z-index'] = '999999';
+      this.dragImage.style['pointer-events'] = 'none';
 
-      var transform = this.dragImage.style["transform"];
-      if (typeof transform !== "undefined") {
-        this.dragImageTransform = "";
-        if (transform != "none") {
+      var transform = this.dragImage.style['transform'];
+      if (typeof transform !== 'undefined') {
+        this.dragImageTransform = '';
+        if (transform != 'none') {
           this.dragImageTransform = transform.replace(/translate\(\D*\d+[^,]*,\D*\d+[^,]*\)\s*/g, '');
         }
       }
 
-      var webkitTransform = this.dragImage.style["-webkit-transform"];
-      if (typeof webkitTransform !== "undefined") {
-        this.dragImageWebKitTransform = "";
-        if (webkitTransform != "none") {
+      var webkitTransform = this.dragImage.style['-webkit-transform'];
+      if (typeof webkitTransform !== 'undefined') {
+        this.dragImageWebKitTransform = '';
+        if (webkitTransform != 'none') {
           this.dragImageWebKitTransform = webkitTransform.replace(/translate\(\D*\d+[^,]*,\D*\d+[^,]*\)\s*/g, '');
         }
       }
@@ -210,10 +210,10 @@ define(function(require) {
     // Is this node an element?
     if (srcNode.nodeType == 1) {
       // Remove any potential conflict attributes
-      dstNode.removeAttribute("id");
-      dstNode.removeAttribute("class");
-      dstNode.removeAttribute("style");
-      dstNode.removeAttribute("draggable");
+      dstNode.removeAttribute('id');
+      dstNode.removeAttribute('class');
+      dstNode.removeAttribute('style');
+      dstNode.removeAttribute('draggable');
 
       // Clone the style
       var cs = window.getComputedStyle(srcNode);
@@ -227,8 +227,8 @@ define(function(require) {
   function _elementFromTouchEvent(el,event) {
     var touch = event.changedTouches[0];
     var target = document.elementFromPoint(
-      touch[touchCoordinateVariable + "X"],
-      touch[touchCoordinateVariable + "Y"]
+      touch[touchCoordinateVariable + 'X'],
+      touch[touchCoordinateVariable + 'Y']
     );
     return target
   }
