@@ -34,20 +34,6 @@ body {
     background-color: #aaa;
     color: #999;
     cursor: not-allowed; }
-  @media (min-width: 1025px) {
-    .btn {
-      width: 141px; } }
-  .btn span {
-    padding-top: 8px;
-    display: none; }
-    @media (min-width: 1025px) {
-      .btn span {
-        display: block; } }
-  .btn i {
-    display: inline; }
-    @media (min-width: 1025px) {
-      .btn i {
-        display: none; } }
 
 label {
   display: block;
@@ -144,6 +130,9 @@ p {
       margin-right: 15px; }
       .toolbar-region .toolbar .btn:last-child {
         margin-right: 0px; }
+      @media (min-width: 1025px) {
+        .toolbar-region .toolbar .btn {
+          width: 141px; } }
 
 .map-region {
   width: calc(100% - 220px);
@@ -210,10 +199,10 @@ p {
 
 .tile-picker-window {
   height: calc(100% - 50px);
-  width: 200px;
+  width: 220px;
   position: absolute;
   top: 50px;
-  left: 0;
+  right: 0;
   background-color: #ccc;
   margin-left: -200px;
   -webkit-transition: all 0.5s;
@@ -247,6 +236,9 @@ p {
   user-select: none; }
   .status-bar > * {
     padding: 20px 10px 10px; }
+  @media (min-width: 1025px) {
+    .status-bar {
+      width: 300px; } }
   .status-bar .tile-details {
     margin: 0 auto; }
     .status-bar .tile-details .current-tile-image {

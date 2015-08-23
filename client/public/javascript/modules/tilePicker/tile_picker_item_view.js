@@ -24,12 +24,7 @@ define(function(require) {
       'dragend @ui.icon'   : 'onDragEnd'
     },
 
-    collectionEvents: {
-      'add': 'render'
-    },
-
     initialize: function() {
-      this.collection.fetch();
       this.addListeners();
     },
 

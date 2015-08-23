@@ -45,6 +45,10 @@
       &:last-child {
         margin-right: 0px;
       }
+
+      @include media-desktop-only {
+        width: 141px;
+      }
     }
   }
 }

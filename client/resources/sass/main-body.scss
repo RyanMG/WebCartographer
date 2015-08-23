@@ -32,27 +32,6 @@ body {
     color: $gray4;
     cursor: not-allowed;
   }
-
-  @include media-desktop-only {
-    width: 141px;
-  }
-
-  span {
-    padding-top: 8px;
-    display: none;
-
-    @include media-desktop-only {
-      display: block;
-    }
-  }
-
-  i {
-    display: inline;
-
-    @include media-desktop-only {
-      display: none;
-    }
-  }
 }
 
 label {

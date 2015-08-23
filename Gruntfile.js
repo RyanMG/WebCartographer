@@ -17,7 +17,7 @@ module.exports = function(grunt) {
         expand: true,
         cwd: '<%= app.client %>/resources/jade',
         src: ['index.jade'],
-        dest: 'public/',
+        dest: '<%= app.client %>/public/',
         ext: '.html',
         options: {
           pretty: false
